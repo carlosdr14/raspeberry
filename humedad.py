@@ -1,5 +1,6 @@
 import Adafruit_DHT
 
+
 class HumiditySensor:
     def __init__(self, sensor, pin):
         self.sensor = sensor
@@ -12,16 +13,17 @@ class HumiditySensor:
         else:
             return None
 
+
 # Ejemplo de uso
 sensor = HumiditySensor(Adafruit_DHT.DHT11, 17)
 humidity = sensor.read_humidity()
 try:
     while True:
-        print("Humedad:", humidity, "%")
-        time.sleep(3)
+       if humidity is not None:
+           print('Humedad: {0}%'.format(humidity))
+       else:
+           print('Error al leer la humedad del sensor.')
 except KeyboardInterrupt:
     pass
-# if humidity is not None:
-#     print('Humedad: {0}%'.format(humidity))
-# else:
-#     print('Error al leer la humedad del sensor.')
+
+ 
