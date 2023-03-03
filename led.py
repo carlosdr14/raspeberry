@@ -35,10 +35,8 @@ try:
         
         # Ejecutar la acción correspondiente
         if action == "on":
-            led.on()
             led.encender()
         elif action == "off":
-            led.off()
             led.apagar()
         elif action == "exit":
             break
