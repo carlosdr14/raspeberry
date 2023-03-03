@@ -1,10 +1,12 @@
 import RPi.GPIO as GPIO
 import time
 
-# Configuración de los pines GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO_TRIGGER = 11
-GPIO_ECHO = 13
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO_TRIGGER = 18
+GPIO_ECHO = 24
+
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 
