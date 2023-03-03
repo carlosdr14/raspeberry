@@ -1,22 +1,22 @@
-import RPi.GPIO as GPIO
-import time
+import Adafruit_DHT
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
+class HumiditySensor:
+    def __init__(self, sensor, pin):
+        self.sensor = sensor
+        self.pin = pin
 
-# Configurar el pin de lectura del sensor de humedad
-hum_pin = 17
-GPIO.setup(hum_pin, GPIO.IN)
+    def read_humidity(self):
+        humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
+        if humidity is not None:
+            return round(humidity, 2)
+        else:
+            return None
 
-# Función para leer la humedad del suelo
-def read_humidity():
-    hum = 0
-    for i in range(10):
-        hum += GPIO.input(hum_pin)
-        time.sleep(0.1)
-    hum = hum / 10.0
-    return hum
+# Ejemplo de uso
+sensor = HumiditySensor(Adafruit_DHT.DHT11, 17)
+humidity = sensor.read_humidity()
 
-# Leer la humedad del suelo
-hum = read_humidity()
-print("Humedad del suelo:", hum)
+if humidity is not None:
+    print('Humedad: {0}%'.format(humidity))
+else:
+    print('Error al leer la humedad del sensor.')
