@@ -18,5 +18,10 @@ def read_humidity():
     return hum
 
 # Leer la humedad del suelo
-hum = read_humidity()
-print("Humedad del suelo:", hum)
+try:
+    while True:
+        hum = read_humidity()
+        print("Humedad del suelo:", hum)
+        time.sleep(3)
+except KeyboardInterrupt:
+    pass
