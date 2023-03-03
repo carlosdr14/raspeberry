@@ -1,12 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-
-GPIO_TRIGGER = 18
-GPIO_ECHO = 24
-
+# Configuración de los pines GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO_TRIGGER = 11
+GPIO_ECHO = 13
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
 
@@ -45,7 +43,7 @@ def distancia():
 try:
     while True:
         print("Distancia:", distancia(), "cm")
-        time.sleep(3)
+        time.sleep(1)
 
 except KeyboardInterrupt:
     pass
