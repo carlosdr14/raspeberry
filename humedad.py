@@ -14,9 +14,11 @@ class HumiditySensor:
 
 # Ejemplo de uso
 sensor = HumiditySensor(Adafruit_DHT.DHT11, 17)
-humidity = sensor.read_humidity()
 
-if humidity is not None:
-    print('Humedad: {0}%'.format(humidity))
-else:
-    print('Error al leer la humedad del sensor.')
+while True:
+    humidity = sensor.read_humidity()
+
+    if humidity is not None:
+       print('Humedad: {0}%'.format(humidity))
+    else:
+       print('Error al leer la humedad del sensor.')
