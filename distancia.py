@@ -13,7 +13,7 @@ def distancia():
     GPIO.output(GPIO_TRIGGER, False)
 
     # Esperar un momento para permitir que el sensor se estabilice
-    time.sleep(0.5)
+    time.sleep(1)
 
     # Enviar un pulso al sensor
     GPIO.output(GPIO_TRIGGER, True)
