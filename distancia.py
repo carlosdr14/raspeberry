@@ -41,7 +41,7 @@ def distancia():
 try:
     while True:
         print("Distancia:", distancia(), "cm")
-        time.sleep(1)
+        time.sleep(3)
 
 except KeyboardInterrupt:
     pass
