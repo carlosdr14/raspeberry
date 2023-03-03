@@ -1,3 +1,4 @@
+import time
 import Adafruit_DHT
 
 class HumiditySensor:
@@ -12,13 +13,14 @@ class HumiditySensor:
         else:
             return None
 
-# Ejemplo de uso
-sensor = HumiditySensor(Adafruit_DHT.DHT11, 17)
+# Crear instancia del sensor
+sensor = HumiditySensor(Adafruit_DHT.DHT11, 4)
 
+# Bucle infinito para leer y mostrar la humedad cada 5 segundos
 while True:
     humidity = sensor.read_humidity()
-
     if humidity is not None:
-       print('Humedad: {0}%'.format(humidity))
+        print('Humedad: {0}%'.format(humidity))
     else:
-       print('Error al leer la humedad del sensor.')
+        print('Error al leer la humedad del sensor.')
+    time.sleep(5)
