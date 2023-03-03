@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-class LED:
+class Led:
     def __init__(self, pin):
         self.pin = pin
         GPIO.setmode(GPIO.BOARD)
@@ -10,15 +10,17 @@ class LED:
     
     def on(self):
         GPIO.output(self.pin, GPIO.HIGH)
-    
+        print("LED encendido")
+
     def off(self):
         GPIO.output(self.pin, GPIO.LOW)
+        print("LED apagado")
     
     def cleanup(self):
         GPIO.cleanup(self.pin)
 
 # Crea un objeto LED para el pin 11
-led = LED(18)
+led = Led(18)
 
 try:
     while True:
