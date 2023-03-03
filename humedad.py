@@ -17,10 +17,9 @@ class HumiditySensor:
 sensor = HumiditySensor(Adafruit_DHT.DHT11, 4)
 
 # Bucle infinito para leer y mostrar la humedad cada 5 segundos
-while True:
-    humidity = sensor.read_humidity()
-    if humidity is not None:
+humidity = sensor.read_humidity()
+if humidity is not None:
         print('Humedad: {0}%'.format(humidity))
-    else:
+else:
         print('Error al leer la humedad del sensor.')
-    time.sleep(5)
+time.sleep(5)
