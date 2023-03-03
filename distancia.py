@@ -3,7 +3,6 @@ import time
 
 # Configuración de los pines GPIO
 GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
 GPIO_TRIGGER = 11
 GPIO_ECHO = 13
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -22,8 +21,11 @@ def distancia():
     GPIO.output(GPIO_TRIGGER, False)
 
     # Esperar a que el sensor envíe una señal de retorno
+    start_time = time.time()
+    end_time = 0
     while GPIO.input(GPIO_ECHO) == 0:
-        start_time = time.time()
+        if time.time() - start_time > 1:
+            break
 
     while GPIO.input(GPIO_ECHO) == 1:
         end_time = time.time()
