@@ -4,24 +4,30 @@ import time
 class Led:
     def __init__(self, pin):
         self.pin = pin
-        GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setwarnings(False)
         GPIO.setup(self.pin, GPIO.OUT)
-        GPIO.output(self.pin, GPIO.LOW)
-    
-    def on(self):
+
+    def encender(self):
         GPIO.output(self.pin, GPIO.HIGH)
         print("LED encendido")
 
-    def off(self):
+    def apagar(self):
         GPIO.output(self.pin, GPIO.LOW)
         print("LED apagado")
-    
-    def cleanup(self):
-        GPIO.cleanup(self.pin)
 
-# Crea un objeto LED para el pin 11
+    def parpadear(self, duracion_encendido, duracion_apagado, repeticiones):
+        for i in range(repeticiones):
+            self.encender()
+            time.sleep(duracion_encendido)
+            self.apagar()
+            time.sleep(duracion_apagado)
+
+    def limpiar(self):
+        GPIO.cleanup()
+
+# Ejemplo de uso
 led = Led(18)
-
 try:
     while True:
         # Preguntar al usuario si desea prender o apagar el LED
@@ -30,8 +36,10 @@ try:
         # Ejecutar la acción correspondiente
         if action == "on":
             led.on()
+            led.encender()
         elif action == "off":
             led.off()
+            led.apagar()
         elif action == "exit":
             break
         else:
@@ -42,5 +50,3 @@ except KeyboardInterrupt:
 
 # Limpiar el pin del LED antes de salir
 led.cleanup()
-
-
