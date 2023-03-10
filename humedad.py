@@ -1,24 +1,22 @@
 import Adafruit_DHT
-import time
 
 class HumiditySensor:
-    def __init__(self, pin=17):
-        self.sensor = Adafruit_DHT.DHT11
+    def __init__(self, sensor, pin):
+        self.sensor = sensor
         self.pin = pin
 
-    def get_humidity_temperature(self):
+    def read_humidity(self):
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
-        if humidity is not None and temperature is not None:
-            return humidity, temperature
+        if humidity is not None:
+            return round(humidity, 2)
         else:
-            return 0, 0
+            return None
 
-    def monitor(self, duration):
-        start_time = time.time()
-        while (time.time() - start_time) < duration:
-            humidity, temperature = self.get_humidity_temperature()
-            print("Humidity: {:.1f}%, Temperature: {:.1f}°C".format(humidity, temperature))
-            time.sleep(1)
+# Ejemplo de uso
+sensor = HumiditySensor(Adafruit_DHT.DHT11, 17)
+humidity = sensor.read_humidity()
 
-sensor = HumiditySensor()
-sensor.monitor(60)  # Mide la humedad y la temperatura durante 60 segundos
+if humidity is not None:
+    print('Humedad: {0}%'.format(humidity))
+else:
+    print('Error al leer la humedad del sensor.')
