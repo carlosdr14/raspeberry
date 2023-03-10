@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 class Temperatura:
     def _init_(self):
         self.sensor = Adafruit_DHT.DHT11
-        self.pin = 21
+        self.pin = 22
         GPIO.setmode(GPIO.BCM)
 
     def get_temperatura_humedad(self):
