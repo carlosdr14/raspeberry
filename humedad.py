@@ -1,9 +1,8 @@
 import Adafruit_DHT
 import RPi.GPIO as GPIO
 
-
 class Temperatura:
-    def _init_(self):
+    def __init__(self):
         self.sensor = Adafruit_DHT.DHT11
         self.pin = 17
         GPIO.setmode(GPIO.BCM)
@@ -26,5 +25,3 @@ class Temperatura:
 if __name__ == "__main__":
     temperatura = Temperatura()
     temperatura.temHum()
-        
-    
