@@ -19,4 +19,6 @@ humidity = sensor.read_humidity()
 if humidity is not None:
     print('Humedad: {0}%'.format(humidity))
 else:
+    
+    
     print('Error al leer la humedad del sensor.')
