@@ -8,20 +8,29 @@ class TemperatureSensor:
 
     def get_temperature_humidity(self):
         humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
-        if humidity is not None and temperature is not None:
-            return {'temperature': temperature, 'humidity': humidity}
+        if temperature is not None and humidity is not None:
+            data = {'temperature': temperature, 'humidity': humidity}
+            return data
         else:
             return None
 
-    def monitor(self, interval):
-        while True:
-            data = self.get_temperature_humidity()
+class SensorMonitor:
+    def __init__(self, sensor, pin):
+        self.sensor = TemperatureSensor(sensor, pin)
+
+    def monitor(self, duration):
+        start_time = time.time()
+        end_time = start_time + duration
+        while time.time() < end_time:
+            data = self.sensor.get_temperature_humidity()
             if data is not None:
-                print('Temperature: {0:0.1f} C  Humidity: {1:0.1f} %'.format(data['temperature'], data['humidity']))
+                print("Temperature: {}C, Humidity: {}%".format(data['temperature'], data['humidity']))
             else:
-                print('Failed to get reading. Try again!')
-            time.sleep(interval)
+                print("Failed to retrieve data.")
+            time.sleep(1)
 
 if __name__ == '__main__':
-    sensor = TemperatureSensor(Adafruit_DHT.DHT11, 17)
-    sensor.monitor(5)
+    sensor = Adafruit_DHT.DHT11
+    pin = 17
+    monitor = SensorMonitor(sensor, pin)
+    monitor.monitor(10)
