@@ -24,5 +24,4 @@ class TemperatureSensor:
 
 if __name__ == '__main__':
     sensor = TemperatureSensor(Adafruit_DHT.DHT11, 17)
-    sensor.get_temperature_humidity()
-    sensor.monitor(5)
+
