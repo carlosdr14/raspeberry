@@ -20,5 +20,9 @@ class HumiditySensor:
             print("Humidity: {:.1f}%, Temperature: {:.1f}°C".format(humidity, temperature))
             time.sleep(1)
 
-sensor = HumiditySensor()
-sensor.monitor(60)  # Mide la humedad y la temperatura durante 60 segundos
+if humidity is not None:
+    print('Humedad: {0}%'.format(humidity))
+else:
+    
+    
+    print('Error al leer la humedad del sensor.')
