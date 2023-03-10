@@ -27,7 +27,7 @@ class Led:
         GPIO.cleanup()
 
 # Ejemplo de uso
-led = Led(18)
+led = Led(19)
 try:
     while True:
         # Preguntar al usuario si desea prender o apagar el LED
