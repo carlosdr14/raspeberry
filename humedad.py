@@ -1,6 +1,7 @@
 import Adafruit_DHT
 import RPi.GPIO as GPIO
 
+
 class Temperatura:
     def _init_(self):
         self.sensor = Adafruit_DHT.DHT11
@@ -21,3 +22,6 @@ class Temperatura:
         datos = temperatura.get_temperatura_humedad()
         print("Temperatura: ", datos[0], "C")
         print("Humedad: ", datos[1] , "%")
+        print("")
+        return datos
+    
