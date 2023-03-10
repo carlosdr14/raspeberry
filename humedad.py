@@ -31,6 +31,6 @@ class SensorMonitor:
 
 if __name__ == '__main__':
     sensor = Adafruit_DHT.DHT11
-    pin = 4
+    pin = 17
     monitor = SensorMonitor(sensor, pin)
     monitor.monitor(10)
