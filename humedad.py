@@ -22,5 +22,9 @@ class Temperatura:
         datos = temperatura.get_temperatura_humedad()
         print("Temperatura: ", datos[0], "C")
         print("Humedad: ", datos[1] , "%")
+    
+if __name__ == "__main__":
+    temperatura = Temperatura()
+    temperatura.temHum()
         
     
