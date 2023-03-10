@@ -10,3 +10,4 @@ while True:
   print ('Temperatura: ' , temperatura)
   
   time.sleep(1) 
+  humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin, platform=Adafruit_DHT.DHT22.AM2302)
