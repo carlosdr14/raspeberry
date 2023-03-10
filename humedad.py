@@ -19,7 +19,7 @@ class SensorTH:
             data = self.get_temperature_humidity()
             if data is not None:
                 temperature, humidity = data
-                print("Temperature: {}°C, Humidity: {}%".format(temperature, humidity))
+                print("Temperature: {:.1f}°C, Humidity: {:.1f}%".format(temperature, humidity))
             else:
                 print("Failed to retrieve data from sensor.")
             time.sleep(interval)
