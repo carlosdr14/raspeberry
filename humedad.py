@@ -1,28 +1,45 @@
-import Adafruit_DHT
-import time
+import pigpio
 
-class HumiditySensor:
-    def __init__(self, pin=17):
-        self.sensor = Adafruit_DHT.DHT11
-        self.pin = pin
+import DHT22
 
-    def get_humidity_temperature(self):
-        humidity, temperature = Adafruit_DHT.read_retry(self.sensor, self.pin)
-        if humidity is not None and temperature is not None:
-            return humidity, temperature
-        else:
-            return 0, 0
+from time import sleep
 
-    def monitor(self, duration):
-        start_time = time.time()
-        while (time.time() - start_time) < duration:
-            humidity, temperature = self.get_humidity_temperature()
-            print("Humidity: {:.1f}%, Temperature: {:.1f}°C".format(humidity, temperature))
-            time.sleep(1)
 
-if humidity is not None:
-    print('Humedad: {0}%'.format(humidity))
-else:
-    
-    
-    print('Error al leer la humedad del sensor.')
+# Initiate GPIO for pigpio
+
+pi = pigpio.pi()
+
+# Setup the sensor
+
+dht22 = DHT22.sensor(pi, 17) # use the actual GPIO pin name
+
+dht22.trigger()
+
+
+# We want our sleep time to be above 2 seconds.
+
+sleepTime = 3
+
+def readDHT22():
+
+# Get a new reading
+
+dht22.trigger()
+
+# Save our values
+
+humidity = '%.2f' % (dht22.humidity())
+
+temp = '%.2f' % (dht22.temperature())
+
+return (humidity, temp)
+
+while True:
+
+humidity, temperature = readDHT22()
+
+print("Humidity is: " + humidity + "%")
+
+print("Temperature is: " + temperature + "C")
+
+sleep(sleepTime)
