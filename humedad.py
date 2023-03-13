@@ -1,28 +1,27 @@
-import Adafruit_DHT
+#Libraries
 import RPi.GPIO as GPIO
-
-
-class Temperatura:
-    def __init__(self):
-        self.sensor = Adafruit_DHT.DHT11
-        self.pin = 17
-        GPIO.setmode(GPIO.BCM)
-
-    def get_temperatura_humedad(self):
-        temperatura, humedad = Adafruit_DHT.read(self.sensor, self.pin)
-        if temperatura is not None and humedad is not None:
-            datos = [temperatura, humedad]
-            return datos
-        else:
-            return [0,0]
-        
-    def temHum(self):
-        print("Temperatura y humedad")
-        temperatura = Temperatura()
-        datos = temperatura.get_temperatura_humedad()
-        print("Temperatura: ", datos[0], "C")
-        print("Humedad: ", datos[1], "%")
-    
-if __name__ == "__main__":
-    temperatura = Temperatura()
-    temperatura.temHum()
+import time
+import Adafruit_DHT
+ 
+#GPIO Mode (BOARD / BCM)
+GPIO.setmode(GPIO.BCM)
+ 
+#set GPIO Pins
+DHT_PIN = 17
+ 
+def read_sensor():
+    # read sensor data
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHT_PIN)
+ 
+    return temperature, humidity
+ 
+try:
+     while True:
+      temperature, humidity = read_sensor()
+      print("Temperature = {:.1f}°C, Humidity = {:.1f}%".format(temperature, humidity))
+      time.sleep(2)
+ 
+# Reset by pressing CTRL + C
+except KeyboardInterrupt:
+        print("Measurement stopped by User")
+        GPIO.cleanup()
