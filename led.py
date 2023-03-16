@@ -16,15 +16,19 @@ class Led:
         GPIO.output(self.pin, GPIO.LOW)
         print("LED apagado")
 
-    def parpadear(self, duracion_encendido, duracion_apagado, repeticiones):
+    def parpadear(self, tiempo_encendido, tiempo_apagado, repeticiones):
         for i in range(repeticiones):
             self.encender()
-            time.sleep(duracion_encendido)
+            time.sleep(tiempo_encendido)
             self.apagar()
-            time.sleep(duracion_apagado)
+            time.sleep(tiempo_apagado)
+
+
 
     def limpiar(self):
         GPIO.cleanup()
+
+        
     def menu (self):
         print("1. Encender")
         print("2. Apagar")

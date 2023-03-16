@@ -27,6 +27,30 @@ class UltrasonicSensor:
         distance = (time_elapsed * 34300) / 2
 
         return distance
+    
+    def menu (self):
+        print("1. Medir distancia")
+        print("2. Medir distancia continuamente")
+        print("3. Salir")
+        opcion = int(input("Ingrese una opcion: "))
+        return opcion
+    
+    def run(self):
+
+
+        while True:
+            opcion = self.menu()
+            if opcion == 1:
+                dist = self.measure_distance()
+                print("Measured Distance = %.1f cm" % dist)
+            elif opcion == 2:
+                self.run_continuous()
+            elif opcion == 3:
+                break
+            else:
+                print("Opcion no valida")
+        self.__del__()
+        
 
     def run_continuous(self):
         try:
@@ -46,4 +70,4 @@ class UltrasonicSensor:
 
 
 sensor = UltrasonicSensor(18, 24)
-sensor.run_continuous()
+sensor.run()
