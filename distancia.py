@@ -46,5 +46,5 @@ class UltrasonicSensor:
 
 
 
-sensor = UltrasonicSensor(24, 18)
+sensor = UltrasonicSensor(18, 24)
 sensor.run_continuous()
