@@ -59,7 +59,7 @@ try:
         print ("Measured Distance = %.1f cm" % dist)
  
         # Save data to JSON file
-        data = {'distance': dist}
+        data = {'distance': dist , 'timestamp': time.time()}
         save_to_json(data)
  
         # Save data to MongoDB
