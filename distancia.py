@@ -33,8 +33,7 @@ class UltrasonicSensor:
             while True:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                time.sleep(2)
-                print("To stop the measurement press CTRL+C")
+                time.sleep(3)
         except KeyboardInterrupt:
             print("Measurement stopped by User")
             self.__del__()
