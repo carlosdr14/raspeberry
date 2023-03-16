@@ -45,7 +45,6 @@ class UltrasonicSensor:
     
 
 
-if __name__ == "__main__":
 
-    sensor = UltrasonicSensor(24, 18)
-    sensor.run_continuous()
+sensor = UltrasonicSensor(24, 18)
+sensor.run_continuous()
