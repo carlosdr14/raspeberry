@@ -25,26 +25,31 @@ class Led:
 
     def limpiar(self):
         GPIO.cleanup()
-
-# Ejemplo de uso
-led = Led(19)
-try:
-    while True:
-        # Preguntar al usuario si desea prender o apagar el LED
-        action = input("Ingrese 'on' para prender el LED, 'off' para apagarlo, o 'exit' para salir: ")
-        
-        # Ejecutar la acción correspondiente
-        if action == "on":
-            led.encender()
-        elif action == "off":
-            led.apagar()
-        elif action == "exit":
-            break
-        else:
-            print("Acción no válida.")
+    def menu (self):
+        print("1. Encender")
+        print("2. Apagar")
+        print("3. Parpadear")
+        print("4. Salir")
+        opcion = int(input("Ingrese una opcion: "))
+        return opcion
     
-except KeyboardInterrupt:
-    pass
+    def run(self):
 
-# Limpiar el pin del LED antes de salir
-led.cleanup()
+        while True:
+            opcion = self.menu()
+            if opcion == 1:
+                self.encender()
+            elif opcion == 2:
+                self.apagar()
+            elif opcion == 3:
+                self.parpadear(0.5, 0.5, 5)
+            elif opcion == 4:
+                break
+            else:
+                print("Opcion no valida")
+        self.limpiar()
+
+
+
+led = Led(19)
+led.run()
