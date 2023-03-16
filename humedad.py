@@ -1,27 +1,15 @@
 import Adafruit_DHT
-import RPi.GPIO as GPIO
 
-class Temperatura:
-    def __init__(self):
-        self.sensor = Adafruit_DHT.DHT11
-        self.pin = 17
-        GPIO.setmode(GPIO.BCM)
+# Configuración del sensor
+sensor = Adafruit_DHT.DHT22
+pin = 4
 
-    def get_temperatura_humedad(self):
-        temperatura, humedad = Adafruit_DHT.read(self.sensor, self.pin)
-        if temperatura is not None and humedad is not None:
-            datos = [temperatura, humedad]
-            return datos
-        else:
-          return[0,0]
-        
-    def temHum(self):
-        print("Temperatura y humedad")
-        temperatura = Temperatura()
-        datos = temperatura.get_temperatura_humedad()
-        print("Temperatura: ", datos[0], "C")
-        print("Humedad: ", datos[1] , "%")
-    
-if __name__ == "__main__":
-    temperatura = Temperatura()
-    temperatura.temHum()
+# Lectura de los valores de humedad y temperatura
+humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
+
+# Mostrar los valores de humedad y temperatura
+if humedad is not None and temperatura is not None:
+    print('Temperatura={0:0.1f}°C Humedad={1:0.1f}%'.format(temperatura, humedad))
+else:
+    print('Error al leer los valores. Intenta de nuevo!')
+
