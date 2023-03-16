@@ -34,12 +34,15 @@ class UltrasonicSensor:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
                 time.sleep(2)
+                print("To stop the measurement press CTRL+C")
         except KeyboardInterrupt:
             print("Measurement stopped by User")
             self.__del__()
 
     def __del__(self):
         GPIO.cleanup()
+
+    
 
 
 if __name__ == "__main__":
