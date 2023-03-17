@@ -17,6 +17,7 @@ class UltrasonicSensor(Lista,JSONHandler):
         GPIO.setup(echo_pin, GPIO.IN)
         self.file_name = file_name
 
+
     def measure_distance(self):
         GPIO.output(self.trigger_pin, True)
         time.sleep(0.00001)
@@ -45,7 +46,8 @@ class UltrasonicSensor(Lista,JSONHandler):
         return opcion
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
-    def check_internet(self):
+    def check_internet(self, distance):
+        d=distance
         json_handler = JSONHandler("DistanciaLocal.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
@@ -54,10 +56,9 @@ class UltrasonicSensor(Lista,JSONHandler):
             db = client["Raspberry"]
             collection=db['UltasonicSensor']
             print("Connected to MongoDB")
-            distance = ["Distancia", self.measure_distance(), "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-            self.agregar(distance)
-            self.save(distance)  # pass the distance argument
-            collection.insert_one(distance)
+            self.agregar(d)
+            self.save(d)  # pass the distance argument
+            collection.insert_one(d)
             try:
                 products = json_handler.open()
                 for p in products:
@@ -68,10 +69,12 @@ class UltrasonicSensor(Lista,JSONHandler):
                 pass
         else:
             print("No hay internet")
-            distance = ["Distancia", self.measure_distance(), "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-            self.agregar(distance)
-            self.save(distance)  # pass the distance argument
-            self.save([])  # pass an empty list as the argument
+            try:
+             products = json_handler.open()
+             products.append(d)
+             json_handler.save(products)
+            except:
+                json_handler.save([d])
 
 
 
@@ -81,14 +84,14 @@ class UltrasonicSensor(Lista,JSONHandler):
             if opcion == 1:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                self.check_internet()
+                dis= ["Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
+                self.check_internet(dis)
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:
                 break
             else:
                 print("Opcion no valida")
-        self.save([])  # pass an empty list as the argument
         self.__del__()
 
         
