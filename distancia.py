@@ -9,12 +9,13 @@ from lista import Lista
 
 class UltrasonicSensor(Lista,JSONHandler):
     def __init__(self, trigger_pin, echo_pin, file_name):
+        super().__init__()
         GPIO.setmode(GPIO.BCM)
         self.trigger_pin = trigger_pin
         self.echo_pin = echo_pin
-        self.file_name = file_name
         GPIO.setup(trigger_pin, GPIO.OUT)
         GPIO.setup(echo_pin, GPIO.IN)
+        self.file_name = file_name
 
     def measure_distance(self):
         GPIO.output(self.trigger_pin, True)
