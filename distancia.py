@@ -48,6 +48,7 @@ class UltrasonicSensor(Lista,JSONHandler):
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
     def check_internet(self, distance):
         d=distance
+        document = dict(d)
         json_handler = JSONHandler("DistanciaLocal.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
@@ -56,9 +57,9 @@ class UltrasonicSensor(Lista,JSONHandler):
             db = client["Raspberry"]
             collection=db['UltasonicSensor']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)  # pass the distance argument
-            collection.insert_one(d)
+            self.agregar(document)
+            self.save(document)  # pass the distance argument
+            collection.insert_one(document)
             try:
                 products = json_handler.open()
                 for p in products:
