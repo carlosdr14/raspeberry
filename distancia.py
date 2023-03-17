@@ -105,10 +105,7 @@ class UltrasonicSensor(Lista,JSONHandler):
                 time.sleep(3)
         except KeyboardInterrupt:
             print("Measurement stopped by User")
-            self.__del__()
-
-    def __del__(self):
-        GPIO.cleanup()
+         
 
     
 

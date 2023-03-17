@@ -52,7 +52,7 @@ class Led (Lista):
                 break
             else:
                 print("Opcion no valida")
-        self.limpiar()
+       
 
 
 
