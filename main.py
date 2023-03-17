@@ -4,7 +4,8 @@ from mongoConexion import CheckInternet
 import RPi.GPIO as GPIO
 class Main:
     def __init__(self):
-        GPIO.setmode(GPIO.BOARD)
+        
+        
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
         self.check_internet = CheckInternet()
