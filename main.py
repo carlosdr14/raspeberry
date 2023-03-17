@@ -4,6 +4,8 @@ import humedad
 
 
 class Menu():
+    def __init__(self):
+        pass
  
 
     def menu(self):
@@ -24,6 +26,5 @@ class Menu():
             print("Opcion invalida")
             self.menu()
 
-if __name__ == "__main__":
-    menu = Menu()
-    menu.menu()
+menu = Menu()
+menu.menu()
