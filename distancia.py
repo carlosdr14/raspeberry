@@ -46,36 +46,36 @@ class UltrasonicSensor(Lista,JSONHandler):
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
     def check_internet(self):
-        json_handler = JSONHandler("DistanciaLocal.json")
-        check_internet = CheckInternet()
-        if check_internet.is_connected():
-            print("Hay internet")
-            
-            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection=db['UltasonicSensor']
-            print("Connected to MongoDB")
-            distance = ["Distancia", self.measure_distance(), "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-            self.agregar(distance)
-            self.save(distance)
-            collection.insert_one(distance)
+     json_handler = JSONHandler("DistanciaLocal.json")
+     check_internet = CheckInternet()
+     if check_internet.is_connected():
+        print("Hay internet")
+        
+        client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
+        db = client["Raspberry"]
+        collection = db['UltasonicSensor']
+        print("Connected to MongoDB")
+        distance = {"Distancia": self.measure_distance(), "Unidad": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+        self.agregar(distance)
+        self.save(distance)
+        collection.insert_one(distance)
 
-            try:
-                products = json_handler.open()
-                for p in products:
-                    collection.insert_one(p)
-                # Clear the JSON file after submitting the products
-                json_handler.save([])
-            except:
-                pass
+        try:
+            products = json_handler.open()
+            for p in products:
+                collection.insert_one(p)
+            # Clear the JSON file after submitting the products
+            json_handler.save([])
+        except:
+            pass
 
-            self.save()
-        else:
-            print("No hay internet")
-            distance = ["Distancia", self.measure_distance(), "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-            self.agregar(distance)
-            self.save(distance)
-            self.save()
+        self.save()
+     else:
+        print("No hay internet")
+        distance = ["Distancia", self.measure_distance(), "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
+        self.agregar(distance)
+        self.save(distance)
+        self.save()
 
 
 
