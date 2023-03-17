@@ -1,5 +1,6 @@
 import json
 from jsonHandler import JSONHandler
+
 class Lista(JSONHandler):
     def __init__(self):
         self.lista = []
