@@ -58,8 +58,8 @@ class UltrasonicSensor(Lista,JSONHandler):
                 dis= ["Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
                 print(dis)
                 self.agregar(dis)
-                self.guardar(self.file_name)
-                
+                self.save(self.file_name)
+
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:
