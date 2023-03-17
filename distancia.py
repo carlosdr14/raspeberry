@@ -68,6 +68,3 @@ class UltrasonicSensor:
     
 
 
-
-sensor = UltrasonicSensor(18, 24)
-sensor.run()

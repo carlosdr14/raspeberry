@@ -55,5 +55,3 @@ class Led:
 
 
 
-led = Led(19)
-led.run()
