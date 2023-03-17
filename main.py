@@ -1,17 +1,10 @@
-import distancia
-import led
+from distancia import UltrasonicSensor
+from led import Led
 import humedad
 
 
 class Menu():
-    def humedad(self):
-        humedad.humedad()
-    
-    def distancia(self):
-        distancia.distancia()
-    
-    def led(self):
-        led.led()
+ 
 
     def menu(self):
         print("1. Humedad")
@@ -22,9 +15,9 @@ class Menu():
         if opcion == 1:
             self.humedad()
         elif opcion == 2:
-            self.distancia()
+            UltrasonicSensor.menu()
         elif opcion == 3:
-            self.led()
+            Led.menu()
         elif opcion == 4:
             exit()
         else:
