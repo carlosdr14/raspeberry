@@ -2,7 +2,7 @@ import Adafruit_DHT
 
 # Configura el pin GPIO que está conectado al pin DATA del sensor
 sensor = Adafruit_DHT.DHT11
-pin = 4
+pin = 5
 
 # Intenta leer la temperatura y humedad del sensor
 humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
