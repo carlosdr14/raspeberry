@@ -48,10 +48,10 @@ class UltrasonicSensor(Lista,JSONHandler):
         return opcion
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
-    def save_to_json(self,data):
+    def save_to_json(self, data):
      with open('data.json', 'w') as outfile:
-        json.dump(data, outfile)
- 
+        json.dump(list(data), outfile)
+
 # Save data to MongoDB
     def save_to_mongodb(self,data):
         client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
