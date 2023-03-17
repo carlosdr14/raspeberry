@@ -1,7 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-import json
-from pymongo import MongoClient
 
 from mongoConexion import CheckInternet
 import pymongo
@@ -48,17 +46,36 @@ class UltrasonicSensor(Lista,JSONHandler):
         return opcion
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
-    def save_to_json(self, data):
-     with open('data.json', 'w') as outfile:
-        json.dump(list(data), outfile)
-
-# Save data to MongoDB
-    def save_to_mongodb(self,data):
-        client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-        db = client["RaspberryPi"]
-        print("Connected to MongoDB")
-        collection = db['UltrasonicSensor']
-        collection.insert_one(data)
+    def check_internet(self, distance):
+        d=distance
+        
+        json_handler = JSONHandler("DistanciaLocal.json")
+        check_internet = CheckInternet()
+        if check_internet.is_connected():
+            print("Hay internet")
+            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
+            db = client["Raspberry"]
+            collection=db['UltasonicSensor']
+            print("Connected to MongoDB")
+            self.agregar(d)
+            self.save(d)  # pass the distance argument
+            collection.insert_one(d)
+            try:
+                products = json_handler.open()
+                for p in products:
+                    collection.insert_one(p)
+                # Clear the JSON file after submitting the products
+                json_handler.save([])
+            except:
+                pass
+        else:
+            print("No hay internet")
+            try:
+             products = json_handler.open()
+             products.append(d)
+             json_handler.save(products)
+            except:
+                json_handler.save([d])
 
 
 
@@ -69,8 +86,7 @@ class UltrasonicSensor(Lista,JSONHandler):
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
                 dis= {"Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")}
-                self.save_to_json(dis)
-                self.save_to_mongodb(dis)
+                self.check_internet(dis)
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:
@@ -86,7 +102,7 @@ class UltrasonicSensor(Lista,JSONHandler):
             while True:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                time.sleep(2)
+                time.sleep(3)
         except KeyboardInterrupt:
             print("Measurement stopped by User")
             self.__del__()
