@@ -1,4 +1,6 @@
 import Adafruit_DHT
+Adafruit_DHT.platform = Adafruit_DHT.Raspberry_Pi_2
+
 
 # Configura el pin GPIO que está conectado al pin DATA del sensor
 sensor = Adafruit_DHT.DHT11
