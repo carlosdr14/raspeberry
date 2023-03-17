@@ -1,9 +1,10 @@
 from led import Led
 from distancia import UltrasonicSensor
 from mongoConexion import CheckInternet
-
+import RPi.GPIO as GPIO
 class Main:
     def __init__(self):
+        GPIO.setmode(GPIO.BCM)
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
         self.check_internet = CheckInternet()
