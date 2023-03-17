@@ -5,7 +5,7 @@ from mongoConexion import CheckInternet
 class Main:
     def __init__(self):
         self.led = Led(19)
-        self.ultrasonic_sensor = UltrasonicSensor(18, 24)
+        self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
         self.check_internet = CheckInternet()
 
     def menu(self):
