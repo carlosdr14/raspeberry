@@ -1,5 +1,7 @@
 import RPi.GPIO as GPIO
 import time
+import json
+from pymongo import MongoClient
 
 from mongoConexion import CheckInternet
 import pymongo
@@ -46,7 +48,18 @@ class UltrasonicSensor(Lista,JSONHandler):
         return opcion
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
-    
+    def save_to_json(data):
+     with open('data.json', 'w') as outfile:
+        json.dump(data, outfile)
+ 
+# Save data to MongoDB
+    def save_to_mongodb(data):
+        client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
+        db = client["RaspberryPi"]
+        print("Connected to MongoDB")
+        collection = db['UltrasonicSensor']
+        collection.insert_one(data)
+
 
 
     def run(self):
@@ -56,10 +69,8 @@ class UltrasonicSensor(Lista,JSONHandler):
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
                 dis= ["Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-                print(dis)
-                self.agregar(dis)
-                self.save(self.file_name)
-
+                self.save_to_json(dis)
+                self.save_to_mongodb(dis)
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:
