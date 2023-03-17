@@ -5,6 +5,7 @@ from lista import Lista
 class Led (Lista):
     def __init__(self, pin):
         self.pin = pin
+        
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(self.pin, GPIO.OUT)
