@@ -85,7 +85,7 @@ class UltrasonicSensor(Lista,JSONHandler):
             if opcion == 1:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                dis= {"Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")}
+                dis= {"Distancia": dist, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
                 self.check_internet(dis)
             elif opcion == 2:
                 self.run_continuous()
