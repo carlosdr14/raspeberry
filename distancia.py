@@ -6,16 +6,23 @@ import pymongo
 from jsonHandler import JSONHandler
 from lista import Lista
 
+import RPi.GPIO as GPIO
 
-class UltrasonicSensor(Lista,JSONHandler):
-    def __init__(self, trigger_pin, echo_pin, file_name):
+class UltrasonicSensor:
+    def __init__(self, trigger_pin, echo_pin, filename):
         super().__init__()
-        GPIO.setmode(GPIO.BCM)
+
         self.trigger_pin = trigger_pin
         self.echo_pin = echo_pin
-        GPIO.setup(trigger_pin, GPIO.OUT)
-        GPIO.setup(echo_pin, GPIO.IN)
-        self.file_name = file_name
+        self.filename = filename
+
+        # Set up GPIO mode
+        GPIO.setmode(GPIO.BCM)  # or GPIO.setmode(GPIO.BOARD)
+
+        # Set up trigger and echo pins as output and input, respectively
+        GPIO.setup(self.trigger_pin, GPIO.OUT)
+        GPIO.setup(self.echo_pin, GPIO.IN)
+
 
 
     def measure_distance(self):
