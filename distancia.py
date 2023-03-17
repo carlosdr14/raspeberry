@@ -46,37 +46,7 @@ class UltrasonicSensor(Lista,JSONHandler):
         return opcion
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
-    def check_internet(self, distance):
-        d=distance
-        document = dict(d)
-        json_handler = JSONHandler("DistanciaLocal.json")
-        check_internet = CheckInternet()
-        if check_internet.is_connected():
-            print("Hay internet")
-            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection=db['UltasonicSensor']
-            print("Connected to MongoDB")
-            self.agregar(document)
-            self.save(document)  # pass the distance argument
-            collection.insert_one(document)
-            try:
-                products = json_handler.open()
-                for p in products:
-                    collection.insert_one(p)
-                # Clear the JSON file after submitting the products
-                json_handler.save([])
-            except:
-                pass
-        else:
-            print("No hay internet")
-            try:
-             products = json_handler.open()
-             products.append(d)
-             json_handler.save(products)
-            except:
-                json_handler.save([d])
-
+    
 
 
     def run(self):
@@ -86,7 +56,10 @@ class UltrasonicSensor(Lista,JSONHandler):
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
                 dis= ["Distancia", dist, "cm", "Fecha", time.strftime("%d/%m/%y"), "Hora", time.strftime("%H:%M:%S")]
-                self.check_internet(dis)
+                print(dis)
+                self.agregar(dis)
+                self.guardar(self.file_name)
+                
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:
@@ -102,7 +75,7 @@ class UltrasonicSensor(Lista,JSONHandler):
             while True:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                time.sleep(3)
+                time.sleep(2)
         except KeyboardInterrupt:
             print("Measurement stopped by User")
             self.__del__()
