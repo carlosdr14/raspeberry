@@ -33,6 +33,7 @@ class Main:
             ultra=sensorUltrasonico.open()
               #
             for i in ultra:
+             print(i)
              collection.insert_one(i)
             sensorUltrasonico.save([])
 
