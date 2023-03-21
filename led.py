@@ -71,9 +71,11 @@ class Led (Lista):
         while True:
             opcion = self.menu()
             if opcion == 1:
-                self.encender()
+                estado=self.encender()
+                self.check_internet(estado)
             elif opcion == 2:
-                self.apagar()
+                estado=self.apagar()
+                self.check_internet(estado)
             elif opcion == 3:
                 self.parpadear(0.5, 0.5, 5)
             elif opcion == 4:
