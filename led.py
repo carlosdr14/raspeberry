@@ -18,14 +18,14 @@ class Led (Lista):
         print("LED apagado")
 
     def parpadear(self, tiempo_encendido, tiempo_apagado, repeticiones):
-        for i in range(repeticiones):
-            self.encender()
-            time.sleep(tiempo_encendido)
-            self.apagar()
-            time.sleep(tiempo_apagado)
-
-
-
+        try:
+            for i in range(repeticiones):
+                GPIO.output(self.pin, GPIO.HIGH)
+                time.sleep(tiempo_encendido)
+                GPIO.output(self.pin, GPIO.LOW)
+                time.sleep(tiempo_apagado)
+        except KeyboardInterrupt:
+            print("Se ha detenido el parpadeo")
     def limpiar(self):
         GPIO.cleanup()
 
