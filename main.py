@@ -30,15 +30,13 @@ class Main:
             collection=db['UltasonicSensor']
             collection2=db['Led']
             print("Connected to MongoDB")
-            try:
-               ultra=sensorUltrasonico.to_list()
+            ultra=sensorUltrasonico.open()
               #
-               for i in ultra:
-                 collection.insert_one(i)
-               sensorUltrasonico.save([])
+            for i in ultra:
+             collection.insert_one(i)
+            sensorUltrasonico.save([])
 
-            except:
-                pass
+            
   
         else:
             print("No hay internet")
