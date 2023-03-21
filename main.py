@@ -20,7 +20,7 @@ class Main:
         return opcion
     
     def check_internet(self):
-        sensorUltrasonico= JSONHandler("localDistance.json")
+        sensorUltrasonico= JSONHandler("locallLed.json")
         Led= JSONHandler("localLed.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
