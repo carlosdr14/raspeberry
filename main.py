@@ -20,8 +20,8 @@ class Main:
         return opcion
     
     def check_internet(self):
-        sensorUltrasonico= JSONHandler("locallLed.json")
-        Led= JSONHandler("localLed.json")
+        sensorUltrasonico= JSONHandler("localDistance.json")
+        Led= JSONHandler("locallLed.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
@@ -35,11 +35,11 @@ class Main:
               #
                for i in ultra:
                  collection.insert_one(i)
-              
+               sensorUltrasonico.save([])
 
                for i in Led:
                  collection2.insert_one(i)
-               sensorUltrasonico.save([])
+            
                Led.save([])
 
             except:
