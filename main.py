@@ -35,11 +35,11 @@ class Main:
               #
                for i in ultra:
                  collection.insert_one(i)
-               sensorUltrasonico.save([])
+              
 
                for i in Led:
                  collection2.insert_one(i)
-            
+               sensorUltrasonico.save([])
                Led.save([])
 
             except:
