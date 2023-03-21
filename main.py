@@ -20,14 +20,14 @@ class Main:
         return opcion
     
     def check_internet(self):
-        sensorUltrasonico= JSONHandler("DistanciaLocal.json")
+        sensorUltrasonico= JSONHandler("localDistance.json")
         Led= JSONHandler("LedLocal.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
             db = client["Raspberry"]
-            collection=db['UltasonicSensor']
+            collection=db['Ultrasonico']
             collection2=db['Led']
             print("Connected to MongoDB")
             try:
