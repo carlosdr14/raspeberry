@@ -5,7 +5,7 @@ from jsonHandler import JSONHandler
 from mongoConexion import CheckInternet
 import pymongo
 
-class Led (Lista):
+class Led (Lista,JSONHandler):
     def __init__(self, pin):
         self.pin = pin
         GPIO.setmode(GPIO.BCM)
@@ -44,8 +44,6 @@ class Led (Lista):
             db = client["Raspberry"]
             collection=db['Led']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)
             collection.insert_one(d)   
 
         else:
