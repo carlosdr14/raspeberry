@@ -49,7 +49,7 @@ class UltrasonicSensor(Lista,JSONHandler):
     def check_internet(self, distance):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
-        json_handler = JSONHandler("DistanciaLocal.json")
+        json_handler = JSONHandler("localDistance.json")
         d= {"Distancia": distance, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
         if status:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
