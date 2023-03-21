@@ -97,7 +97,9 @@ class UltrasonicSensor(Lista,JSONHandler):
             while True:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                time.sleep(3)
+                dis= {"Distancia": dist, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+                self.check_internet(dis)
+                time.sleep(5)
         except KeyboardInterrupt:
             print("Measurement stopped by User")
          

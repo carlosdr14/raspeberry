@@ -31,7 +31,7 @@ class Main:
             collection2=db['Led']
             print("Connected to MongoDB")
             try:
-               ultra=sensorUltrasonico.open()
+               ultra=sensorUltrasonico.to_list()
               #
                for i in ultra:
                  collection.insert_one(i)
