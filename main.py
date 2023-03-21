@@ -10,7 +10,7 @@ class Main:
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.check_internet = CheckInternet()
+        self.internet_checker = CheckInternet()
 
     def menu(self):
         print("1. Led")
@@ -33,11 +33,13 @@ class Main:
             # pass the distance argument
             try:
                ultra =  ultar.open()
-              
+               led = Led.open()
                for i in ultra:
                    collection.insert_one({"Distancia": i})
                ultra.save([])
-               
+               for i in led:
+                     collection2.insert_one({"Led": i})
+               led.save([])
 
             except:
                 print("No hay datos en el archivo")
@@ -50,7 +52,7 @@ class Main:
 
     def run(self):
         while True:
-            self.check_internet()
+            self.internet_checker.check_internet()
 
             opcion = self.menu()
             if opcion == 1:
