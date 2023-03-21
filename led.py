@@ -44,10 +44,9 @@ class Led (Lista,JSONHandler):
             db = client["Raspberry"]
             collection=db['Led']
             print("Connected to MongoDB")
-            collection.insert_one(d)   
             self.agregar(d)
             self.save(d)
-            
+            collection.insert_one(d)
 
 
         else:
