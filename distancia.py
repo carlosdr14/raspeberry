@@ -92,7 +92,7 @@ class UltrasonicSensor(Lista,JSONHandler):
                 break
             else:
                 print("Opcion no valida")
-        self.__del__()
+       
 
         
 
