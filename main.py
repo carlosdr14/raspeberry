@@ -30,16 +30,16 @@ class Main:
             collection=db['UltasonicSensor']
             collection2=db['Led']
             print("Connected to MongoDB")
-            # pass the distance argument
             try:
                ultra =  ultar.open()
                led = Led.open()
                for i in ultra:
-                   collection.insert_one({"Distancia": i})
-               ultra.save([])
+                   collection.insert_one(i)
+              
                for i in led:
-                     collection2.insert_one({"Led": i})
+                     collection2.insert_one(i)
                led.save([])
+               ultra.save([])
 
             except:
                 print("No hay datos en el archivo")
@@ -64,7 +64,7 @@ class Main:
             else:
                 print("Opcion no valida")
         self.led.limpiar()
-        self.ultrasonic_sensor.__del__()
+        self.ultrasonic_sensor.limpiar()
 
 
 main = Main()

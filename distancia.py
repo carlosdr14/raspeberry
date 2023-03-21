@@ -69,6 +69,10 @@ class UltrasonicSensor(Lista,JSONHandler):
             except:
                 json_handler.save([d])
 
+    
+    def limpiar(self):
+        GPIO.cleanup()
+
 
 
     def run(self):
@@ -85,6 +89,7 @@ class UltrasonicSensor(Lista,JSONHandler):
                 break
             else:
                 print("Opcion no valida")
+            
        
 
         
