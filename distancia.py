@@ -47,22 +47,23 @@ class UltrasonicSensor(Lista,JSONHandler):
     
     #funcion que cheque si hay internet guardando en la base de datos y si no hay internet guarda en un archivo
     def check_internet(self, distance):
-        d=distance
-        
-        json_handler = JSONHandler("DistanciaLocal.json")
         check_internet = CheckInternet()
-        if check_internet.is_connected():
-            print("Hay internet")
+        status, message = check_internet.is_connected()
+        json_handler = JSONHandler("DistanciaLocal.json")
+        d= {"Distancia": distance, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+        if status:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection=db['UltasonicSensor']
+            db = client["Nadia"]
+            collection=db['productos']
             print("Connected to MongoDB")
-            collection.insert_one(d)
             self.agregar(d)
             self.save(d)
+            collection.insert_one(d)
+
+            
             
         else:
-            print("No hay internet")
+            print(message)
             try:
              products = json_handler.open()
              products.append(d)
