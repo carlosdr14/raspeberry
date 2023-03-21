@@ -19,7 +19,7 @@ class Main:
         opcion = int(input("Ingrese una opcion: "))
         return opcion
     
-    def check_internet(self, file_name, file_name2):
+    def check_internet(self):
         ultar= JSONHandler("DistanciaLocal.json")
         Led= JSONHandler("LedLocal.json")
         check_internet = CheckInternet()
@@ -52,7 +52,7 @@ class Main:
 
     def run(self):
         while True:
-            self.check_internet("DistanciaLocal.json", "LedLocal.json")
+            self.check_internet()
 
             opcion = self.menu()
             if opcion == 1:
