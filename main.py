@@ -10,7 +10,7 @@ class Main:
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.internet_checker = CheckInternet()
+       
 
     def menu(self):
         print("1. Led")
@@ -52,7 +52,7 @@ class Main:
 
     def run(self):
         while True:
-            self.internet_checker.check_internet()
+            self.check_internet()
 
             opcion = self.menu()
             if opcion == 1:
