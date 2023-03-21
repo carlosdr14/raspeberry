@@ -33,13 +33,11 @@ class Main:
             # pass the distance argument
             try:
                ultra =  ultar.open()
-               led = Led.open()
+              
                for i in ultra:
                    collection.insert_one({"Distancia": i})
                ultra.save([])
-               for i in led:
-                     collection2.insert_one({"Led": i})
-               led.save([])
+               
 
             except:
                 print("No hay datos en el archivo")
