@@ -32,13 +32,11 @@ class Main:
             print("Connected to MongoDB")
             try:
                ultra =  ultar.open()
-               led = Led.open()
+              #
                for i in ultra:
                    collection.insert_one(i)
               
-               for i in led:
-                     collection2.insert_one(i)
-               led.save([])
+               #
                ultra.save([])
 
             except:
