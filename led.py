@@ -45,6 +45,10 @@ class Led (Lista,JSONHandler):
             collection=db['Led']
             print("Connected to MongoDB")
             collection.insert_one(d)   
+            self.agregar(d)
+            self.save(d)
+            
+
 
         else:
             print(message)
