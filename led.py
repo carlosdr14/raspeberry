@@ -33,32 +33,33 @@ class Led (Lista,JSONHandler):
             print("Se ha detenido el parpadeo")
     def limpiar(self):
         GPIO.cleanup()
-
-    def check_internet(self,estado):
+    def check_internet(self, estado):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
         json_handler = JSONHandler("localLed.json")
-        d= {"Estado": estado, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+        d = {"Estado": estado, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
         if status:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
             db = client["Raspberry"]
-            collection=db['Led']
+            collection = db['Led']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)
+            new_data = [d]
+            try:
+                existing_data = json_handler.open()
+                new_data.extend(existing_data)
+            except:
+                pass
+            json_handler.save(new_data)
             collection.insert_one(d)
-
-
         else:
             print(message)
             try:
-             products = json_handler.open()
-             products.append(d)
-             json_handler.save(products)
+                existing_data = json_handler.open()
+                existing_data.append(d)
+                json_handler.save(existing_data)
             except:
                 json_handler.save([d])
 
-        
     def menu (self):
         print("1. Encender")
         print("2. Apagar")
