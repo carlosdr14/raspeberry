@@ -34,11 +34,10 @@ class Main:
                ultra=sensorUltrasonico.open()
               #
                for i in ultra:
-                   collection.insert_one(i)
+                 collection.insert_one(i)
                sensorUltrasonico.save([])
 
             except:
-                print("No hay datos en el archivo")
                 pass
   
         else:
