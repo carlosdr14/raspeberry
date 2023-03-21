@@ -28,7 +28,7 @@ class Main:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
             db = client["Raspberry"]
             collection=db['Ultrasonico']
-            collection2=db['Led']
+            collection2=db['led']
             print("Connected to MongoDB")
             try:
                ultra=sensorUltrasonico.open()
