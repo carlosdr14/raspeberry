@@ -1,6 +1,9 @@
 import RPi.GPIO as GPIO
 import time
 from lista import Lista
+from jsonHandler import JSONHandler
+from mongoConexion import CheckInternet
+import pymongo
 
 class Led (Lista):
     def __init__(self, pin):
@@ -12,10 +15,12 @@ class Led (Lista):
     def encender(self):
         GPIO.output(self.pin, GPIO.HIGH)
         print("LED encendido")
+        return True
 
     def apagar(self):
         GPIO.output(self.pin, GPIO.LOW)
         print("LED apagado")
+        return False
 
     def parpadear(self, tiempo_encendido, tiempo_apagado, repeticiones):
         try:
@@ -28,6 +33,29 @@ class Led (Lista):
             print("Se ha detenido el parpadeo")
     def limpiar(self):
         GPIO.cleanup()
+
+    def check_internet(self,estado):
+        check_internet = CheckInternet()
+        status, message = check_internet.is_connected()
+        json_handler = JSONHandler("localLed.json")
+        d= {"Estado": estado, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+        if status:
+            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
+            db = client["Raspberry"]
+            collection=db['Led']
+            print("Connected to MongoDB")
+            self.agregar(d)
+            self.save(d)
+            collection.insert_one(d)   
+
+        else:
+            print(message)
+            try:
+             products = json_handler.open()
+             products.append(d)
+             json_handler.save(products)
+            except:
+                json_handler.save([d])
 
         
     def menu (self):
