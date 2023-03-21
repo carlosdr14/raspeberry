@@ -20,7 +20,7 @@ class Main:
         return opcion
     
     def check_internet(self):
-        ultar= JSONHandler("DistanciaLocal.json")
+        sensorUltrasonico= JSONHandler("DistanciaLocal.json")
         Led= JSONHandler("LedLocal.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
@@ -31,13 +31,11 @@ class Main:
             collection2=db['Led']
             print("Connected to MongoDB")
             try:
-               ultra =  ultar.open()
+               ultra=sensorUltrasonico.open()
               #
                for i in ultra:
                    collection.insert_one(i)
-              
-               #
-               ultra.save([])
+               sensorUltrasonico.save([])
 
             except:
                 print("No hay datos en el archivo")
