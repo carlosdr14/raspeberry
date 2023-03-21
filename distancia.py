@@ -58,6 +58,8 @@ class UltrasonicSensor(Lista,JSONHandler):
             collection=db['UltasonicSensor']
             print("Connected to MongoDB")
             collection.insert_one(d)
+            self.agregar(d)
+            self.save(d)
             
         else:
             print("No hay internet")
@@ -80,7 +82,7 @@ class UltrasonicSensor(Lista,JSONHandler):
             if opcion == 1:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                dis= {"Distancia": dist, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+                dis= {"Distancia": dist, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
                 self.check_internet(dis)
             elif opcion == 2:
                 self.run_continuous()
