@@ -39,6 +39,7 @@ class Main:
 
             except:
                 print("No hay datos en el archivo")
+                pass
   
         else:
             print("No hay internet")

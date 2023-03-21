@@ -57,17 +57,8 @@ class UltrasonicSensor(Lista,JSONHandler):
             db = client["Raspberry"]
             collection=db['UltasonicSensor']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)  # pass the distance argument
             collection.insert_one(d)
-            try:
-                products = json_handler.open()
-                for p in products:
-                    collection.insert_one(p)
-                # Clear the JSON file after submitting the products
-                json_handler.save([])
-            except:
-                pass
+            
         else:
             print("No hay internet")
             try:
@@ -76,6 +67,10 @@ class UltrasonicSensor(Lista,JSONHandler):
              json_handler.save(products)
             except:
                 json_handler.save([d])
+
+
+    def limpiar(self):
+        GPIO.cleanup()
 
 
 
@@ -93,7 +88,7 @@ class UltrasonicSensor(Lista,JSONHandler):
                 break
             else:
                 print("Opcion no valida")
-        self.__del__()
+      
 
         
 
