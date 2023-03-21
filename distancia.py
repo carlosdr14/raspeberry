@@ -57,7 +57,7 @@ class UltrasonicSensor(Lista,JSONHandler):
             collection=db['Ultrasonico']
             print("Connected to MongoDB")
             self.agregar(d)
-            self.save(self.lista)
+            self.save(d)
             collection.insert_one(d)
 
             
