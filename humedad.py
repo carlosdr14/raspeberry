@@ -7,7 +7,7 @@ import Adafruit_DHT
 GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
-DHT_PIN = 17
+DHT_PIN = 5
  
 def read_sensor():
     # read sensor data
