@@ -1,5 +1,6 @@
 from led import Led
 from distancia import UltrasonicSensor
+from HumedadMongo import Temperatura
 from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
 import pymongo
@@ -10,6 +11,7 @@ class Main:
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
+        self.temperatura = Temperatura()
        
 
     def menu(self):
@@ -61,7 +63,7 @@ class Main:
             elif opcion == 2:
                 self.ultrasonic_sensor.run()
             elif opcion == 3:
-                break
+                self.temperatura
             else:
                 print("Opcion no valida")
         self.led.limpiar()

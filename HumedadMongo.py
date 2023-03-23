@@ -47,6 +47,6 @@ class Temperatura:
         # Guardar los datos en un archivo JSON
         temperatura.guardar_en_json(datos)
 
-if __name__ == "__main__":
-    temperatura = Temperatura()
-    temperatura.temHum()
+
+temperatura = Temperatura()
+temperatura.temHum()
