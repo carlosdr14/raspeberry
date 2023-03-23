@@ -21,7 +21,10 @@ try:
       print("Temperature = {:.1f}°C, Humidity = {:.1f}%".format(temperature, humidity))
       time.sleep(2)
  
+
+ 
 # Reset by pressing CTRL + C
 except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup()
+        
