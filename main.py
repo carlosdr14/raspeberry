@@ -1,36 +1,78 @@
-import distancia
-import led
-import humedad
-
-
-class Menu():
-    def humedad(self):
-        humedad.humedad()
-    
-    def distancia(self):
-        distancia.distancia()
-    
-    def led(self):
-        led.led()
+from led import Led
+from distancia import UltrasonicSensor
+from HumedadMongo import Temperatura
+from mongoConexion import CheckInternet
+from jsonHandler import JSONHandler
+import pymongo
+import RPi.GPIO as GPIO
+class Main:
+    def __init__(self):
+        
+        
+        self.led = Led(19)
+        self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
+        self.temperatura = Temperatura()
+       
 
     def menu(self):
-        print("1. Humedad")
+        print("1. Led")
         print("2. Distancia")
-        print("3. Led")
+        print("3. TEmperatura y humedad")
         print("4. Salir")
         opcion = int(input("Ingrese una opcion: "))
-        if opcion == 1:
-            self.humedad()
-        elif opcion == 2:
-            self.distancia()
-        elif opcion == 3:
-            self.led()
-        elif opcion == 4:
-            exit()
-        else:
-            print("Opcion invalida")
-            self.menu()
+        return opcion
+    
+    def check_internet(self):
+        sensorUltrasonico= JSONHandler("localDistance.json")
+        Led= JSONHandler("locallLed.json")
+        check_internet = CheckInternet()
+        if check_internet.is_connected():
+            print("Hay internet")
+            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
+            db = client["Raspberry"]
+            collection=db['Ultrasonico']
+            collection2=db['led']
+            print("Connected to MongoDB")
+            try:
+               ultra=sensorUltrasonico.open()
+              #
+               for i in ultra:
+                 collection.insert_one(i)
+               sensorUltrasonico.save([])
 
-if __name__ == "__main__":
-    menu = Menu()
-    menu.menu()
+               for i in Led:
+                 collection2.insert_one(i)
+            
+               Led.save([])
+
+            except:
+                pass
+  
+        else:
+            print("No hay internet")
+          
+
+
+
+    def run(self):
+        while True:
+            self.check_internet()
+
+            opcion = self.menu()
+            if opcion == 1:
+                self.led.run()
+            elif opcion == 2:
+                self.ultrasonic_sensor.run()
+            elif opcion == 3:
+                self.temperatura.run()
+            elif opcion == 4:
+                break
+            else:
+                print("Opcion no valida")
+        self.led.limpiar()
+        self.ultrasonic_sensor.limpiar()
+
+
+main = Main()
+main.run()
+

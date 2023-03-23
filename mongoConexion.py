@@ -20,7 +20,7 @@ class CheckInternet():
     
     def mongo_connect(self):
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Nadia"]
+            db = client["RaspberryPi"]
             print("Connected to MongoDB")
             
        
