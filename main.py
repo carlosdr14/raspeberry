@@ -17,7 +17,8 @@ class Main:
     def menu(self):
         print("1. Led")
         print("2. Distancia")
-        print("3. Salir")
+        print("3. TEmperatura y humedad")
+        print("4. Salir")
         opcion = int(input("Ingrese una opcion: "))
         return opcion
     
@@ -64,6 +65,8 @@ class Main:
                 self.ultrasonic_sensor.run()
             elif opcion == 3:
                 self.temperatura.run()
+            elif opcion == 4:
+                break
             else:
                 print("Opcion no valida")
         self.led.limpiar()
