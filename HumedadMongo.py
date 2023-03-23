@@ -17,22 +17,6 @@ class Temperatura:
             return datos
         else:
             return {"temperatura": 0, "humedad": 0, "fecha": datetime.now()}
-
-    def insertar_en_mongo(self, datos_sensor):
-        # Conectar con una instancia de MongoDB
-        client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-
-        # Seleccionar una base de datos y una colección
-        db = client["sensores"]
-        coleccion = db["datos_sensores"]
-
-        # Insertar los datos en la colección
-        coleccion.insert_one(datos_sensor)
-        
-    def guardar_en_json(self, datos_sensor):
-        with open('datos_sensor.json', 'a') as file:
-            json.dump(datos_sensor, file)
-            file.write('\n')
         
     def temHum(self):
         print("Temperatura y humedad")
@@ -41,12 +25,22 @@ class Temperatura:
         print("Temperatura: ", datos["temperatura"], "C")
         print("Humedad: ", datos["humedad"], "%")
         
-        # Insertar los datos en MongoDB
-        temperatura.insertar_en_mongo(datos)
-        
-        # Guardar los datos en un archivo JSON
-        temperatura.guardar_en_json(datos)
+    def menu (self):
+        print("1. Temperatura y humedad")
+        print("2. Salir")
+        opcion = int(input("Ingrese una opcion: "))
+        return opcion
+    
+    def run(self):
+        while True:
+            opcion = self.menu()
+            if opcion == 1:
+                self.temHum()
+            elif opcion == 2:
+                break
+            else:
+                print("Opcion no valida")
+    
 
 
-temperatura = Temperatura()
-temperatura.temHum()
+

@@ -63,7 +63,7 @@ class Main:
             elif opcion == 2:
                 self.ultrasonic_sensor.run()
             elif opcion == 3:
-                self.temperatura
+                self.temperatura.run()
             else:
                 print("Opcion no valida")
         self.led.limpiar()
