@@ -7,6 +7,7 @@ from jsonHandler import JSONHandler
 from lista import Lista
 
 
+
 class UltrasonicSensor(Lista,JSONHandler):
     def __init__(self, trigger_pin, echo_pin, file_name):
         super().__init__()

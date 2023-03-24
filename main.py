@@ -5,13 +5,14 @@ from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
 import pymongo
 import RPi.GPIO as GPIO
+import board
 class Main:
     def __init__(self):
         
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.temperatura = DHTSensor()
+        self.temperatura = DHTSensor(board.D16)
        
 
     def menu(self):

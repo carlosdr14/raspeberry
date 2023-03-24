@@ -38,7 +38,3 @@ class DHTSensor:
     def stop(self):
         self.running = False
 
-sensor = DHTSensor(board.D16)
-sensor.run()  # Inicia la lectura de datos del sensor
-time.sleep(10)  # Espera 10 segundos
-sensor.stop()  # Detiene la lectura de datos del sensor
