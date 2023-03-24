@@ -62,13 +62,15 @@ class Led (LISTA,JSONHandler):
             opcion = self.menu()
             if opcion == 1:
                 estado=self.encender()
-                
+                self.check_internet(estado)
                 return estado
             elif opcion == 2:
                 estado=self.apagar()
+                self.check_internet(estado)
                 return estado
             elif opcion == 3:
                Estado= self.parpadear(0.5, 0.5, 5)
+               self.check_internet(Estado)
                return Estado
 
             elif opcion == 4:

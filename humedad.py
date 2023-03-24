@@ -66,6 +66,8 @@ class DHTSensor(LISTA, JSONHandler):
                 if temperatures is not None:
                     self.check_internet(*temperatures)
                     print("Temperatura F: {:.1f}, Temperatura C: {:.1f}, Humedad: {}%".format(*temperatures))
+                    self.check_internet(*temperatures)
+
                     return temperatures
             elif opcion == 2:
                 break
