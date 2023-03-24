@@ -9,9 +9,10 @@ class Temperatura:
         self.sensor = Adafruit_DHT.DHT11
         self.pin = 16
         GPIO.setmode(GPIO.BCM)
+        DHT_PIN = 16
 
     def get_temperatura_humedad(self):
-        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHT_PIN)
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, self.DHT_PIN)
         if temperature is not None and humidity is not None:
             datos = {"temperatura": temperature, "humedad": humidity, "fecha": datetime.now()}
             return datos
