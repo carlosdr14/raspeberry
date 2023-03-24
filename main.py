@@ -6,8 +6,9 @@ from jsonHandler import JSONHandler
 import pymongo
 import RPi.GPIO as GPIO
 import board
+from jsonHandler import JSONHandler
 class Main:
-    def __init__(self):
+    def __init__(self,JsonHandler):
         
         
         self.led = Led(19, "localLedd.json")
@@ -23,7 +24,6 @@ class Main:
         opcion = int(input("Ingrese una opcion: "))
         return opcion
     
-
     def check_internet(self):
         sensorUltrasonico = JSONHandler("localDistance.json")
         check_internet = CheckInternet()
@@ -33,18 +33,18 @@ class Main:
                 db = client["Raspberry"]
                 collection = db['SensorsData']
                 try:
-                    ultra= sensorUltrasonico.open()
+                    ultra = sensorUltrasonico.open()
                     for i in ultra:
-                     collection.insert_one(i)
+                        data = {"sensor": "ultrasonico", "data": i}
+                        collection.insert_one(data)
                     sensorUltrasonico.save([])
-
-              
 
                 except:
                     pass
 
         else:
             print("No hay internet")
+
 
     def check_internet2(self):
         
