@@ -1,17 +1,16 @@
 import RPi.GPIO as GPIO
 import time
-from lista import Lista
+from lista import LISTA
 from jsonHandler import JSONHandler
 from mongoConexion import CheckInternet
 import pymongo
 
-class Led (Lista,JSONHandler):
+class Led (LISTA,JSONHandler):
     def __init__(self, pin):
         self.pin = pin
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(self.pin, GPIO.OUT)
-        self.lista = Lista()
 
     def encender(self):
         GPIO.output(self.pin, GPIO.HIGH)
@@ -45,8 +44,8 @@ class Led (Lista,JSONHandler):
             db = client["Raspberry"]
             collection = db['Led']
             print("Connected to MongoDB")
-            self.lista.agregar(d)
-            self.lista.save(d)
+            self.agregar(d)
+            self.save(d)
             collection.insert_one(d)
         else:
             print(message)

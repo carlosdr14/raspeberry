@@ -4,10 +4,10 @@ import adafruit_dht
 import pymongo
 from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
-from lista import Lista
+from lista import LISTA
 
 
-class DHTSensor(Lista, JSONHandler):
+class DHTSensor(LISTA, JSONHandler):
     def __init__(self, pin, file_name):
         self.dhtDevice = adafruit_dht.DHT11(pin)
         self.file_name = file_name
@@ -38,7 +38,8 @@ class DHTSensor(Lista, JSONHandler):
             db = client["Raspberry"]
             collection = db['Temperatura']
             print("Connected to MongoDB")
-          
+            self.agregar(d)
+            self.save(d)
             collection.insert_one(d)
         else:
             print(message)

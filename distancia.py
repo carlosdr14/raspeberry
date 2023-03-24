@@ -4,11 +4,11 @@ import time
 from mongoConexion import CheckInternet
 import pymongo
 from jsonHandler import JSONHandler
-from lista import Lista
+from lista import LISTA
 
 
 
-class UltrasonicSensor(Lista,JSONHandler):
+class UltrasonicSensor(LISTA,JSONHandler):
     def __init__(self, trigger_pin, echo_pin, file_name):
         super().__init__()
         GPIO.setmode(GPIO.BCM)
