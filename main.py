@@ -34,8 +34,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= sensorUltrasonico.open()
-                    
-                    data = {"sensor": "ultrasonico", "data": sensor}
+                    for i in sensor:
+                     data = [{"sensor": "ultrasonico", "data": i}]
                     collection.insert_one(data)
                     sensorUltrasonico.save([])
 
