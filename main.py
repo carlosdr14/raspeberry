@@ -8,7 +8,7 @@ import RPi.GPIO as GPIO
 import board
 from jsonHandler import JSONHandler
 class Main:
-    def __init__(self,JsonHandler):
+    def __init__(self):
         
         
         self.led = Led(19, "localLedd.json")
