@@ -8,18 +8,21 @@ class DHTSensor:
         self.running = False
 
     def run(self):
-        self.running = True
+        try:
+            temperature_c = self.dhtDevice.temperature
+            temperature_f = temperature_c * (9 / 5) + 32
+            humidity = self.dhtDevice.humidity
+            print("Temp: {:.1f} F / {:.1f} C    Humidity: {}% "
+                .format(temperature_f, temperature_c, humidity))
+        except RuntimeError as error:
+            print(error.args[0])
 
-        while self.running:
+        while True:
             try:
-                temperature_c = self.dhtDevice.temperature
-                temperature_f = temperature_c * (9 / 5) + 32
-                humidity = self.dhtDevice.humidity
-                print("Temp: {:.1f} F / {:.1f} C    Humidity: {}% "
-                      .format(temperature_f, temperature_c, humidity))
-            except RuntimeError as error:
-                print(error.args[0])
-            time.sleep(2.0)
+                time.sleep(2.0)
+            except KeyboardInterrupt:
+                print("Programa interrumpido por el usuario.")
+                break
 
 
     def menu(self):
