@@ -24,7 +24,7 @@ class Main:
         return opcion
     
 
-    def check_internet(self, estado):
+    def check_internet(self):
         sensorUltrasonico = JSONHandler("localDistance.json")
         Led = JSONHandler("localLedd.json")
         Temperatura = JSONHandler("localTemperatura.json")
