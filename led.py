@@ -6,8 +6,9 @@ from mongoConexion import CheckInternet
 import pymongo
 
 class Led (LISTA,JSONHandler):
-    def __init__(self, pin):
+    def __init__(self, pin, file_name):
         super().__init__()
+        self.file_name = file_name
         self.pin = pin
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
