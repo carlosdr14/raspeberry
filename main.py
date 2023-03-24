@@ -52,7 +52,7 @@ class Main:
     def check_internet2(self):
         
         Led = JSONHandler("localLedd.json")
-        Temperatura = JSONHandler("localTemperatura.json")
+       
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
@@ -61,8 +61,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= Led.open()
-                    for sensor in sensor:
-                     data = {"sensor": "Led", "data": sensor}
+                    for i in sensor:
+                     data = [{"sensor": "Led", "data": i}]
                     collection.insert_one(data)
                     Led.save([])
 
