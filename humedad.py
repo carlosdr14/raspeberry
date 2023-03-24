@@ -49,6 +49,9 @@ class DHTSensor(Lista, JSONHandler):
             except:
                 self.save([d], self.file_name)
 
+    def limpiar(self):
+        self.dhtDevice.exit()
+
     def run(self):
         while True:
             opcion = self.menu()

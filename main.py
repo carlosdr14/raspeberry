@@ -26,6 +26,7 @@ class Main:
     def check_internet(self):
         sensorUltrasonico= JSONHandler("localDistance.json")
         Led= JSONHandler("locallLed.json")
+        Temperatura= JSONHandler("localTemperatura.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
@@ -33,19 +34,25 @@ class Main:
             db = client["Raspberry"]
             collection=db['Ultrasonico']
             collection2=db['led']
+            collection3=db['Temperatura']
             print("Connected to MongoDB")
             try:
                ultra=sensorUltrasonico.open()
+               led=Led.open()
+               tem=Temperatura.open()
               #
                for i in ultra:
                  collection.insert_one(i)
                sensorUltrasonico.save([])
 
-               for i in Led:
+               for i in led:
                  collection2.insert_one(i)
             
                Led.save([])
 
+               for i in tem:
+                    collection3.insert_one(i)
+               Temperatura.save([])
             except:
                 pass
   
@@ -67,11 +74,15 @@ class Main:
             elif opcion == 3:
                 self.temperatura.run()
             elif opcion == 4:
+
+
+
                 break
             else:
                 print("Opcion no valida")
         self.led.limpiar()
         self.ultrasonic_sensor.limpiar()
+        self.temperatura.limpiar()
 
 
 main = Main()
