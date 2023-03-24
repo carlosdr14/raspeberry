@@ -12,6 +12,7 @@ class DHTSensor(LISTA, JSONHandler):
         super().__init__()
         self.dhtDevice = adafruit_dht.DHT11(pin)
         self.file_name = file_name
+        self.pin = pin
 
     def get_temperatures(self):
         try:
@@ -33,7 +34,7 @@ class DHTSensor(LISTA, JSONHandler):
             "Humedad": humidity,
             "Fecha": time.strftime("%d/%m/%y"),
             "Hora": time.strftime("%H:%M:%S"),
-            "Pin": self.dhtDevice,
+            "Pin": self.pin,
             "Ubicacion": "Dentro del Carrito"
         }
 
