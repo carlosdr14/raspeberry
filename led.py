@@ -46,7 +46,7 @@ class Led (LISTA,JSONHandler):
  
         self.agregar(d)
         self.save(d)
-      
+        return d
 
     def menu (self):
         print("1. Encender")
@@ -62,7 +62,7 @@ class Led (LISTA,JSONHandler):
             opcion = self.menu()
             if opcion == 1:
                 estado=self.encender()
-                self.check_internet(estado)
+                estado=self.check_internet(estado)
                 return estado
             elif opcion == 2:
                 estado=self.apagar()

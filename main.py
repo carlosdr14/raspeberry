@@ -24,7 +24,7 @@ class Main:
         return opcion
     
 
-    def check_internet(self):
+    def check_internet(self, estado):
         sensorUltrasonico = JSONHandler("localDistance.json")
         Led = JSONHandler("localLedd.json")
         Temperatura = JSONHandler("localTemperatura.json")
@@ -37,7 +37,7 @@ class Main:
                 try:
                     sensor= sensorUltrasonico.open()
                     for i in sensor:
-                        data = {"sensor": "ultrasonico", "data": i}
+                        data = {"sensor": "ultrasonico", "data": sensor}
                         collection.insert_one(data)
                     sensorUltrasonico.save([])
 
