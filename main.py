@@ -23,42 +23,40 @@ class Main:
         opcion = int(input("Ingrese una opcion: "))
         return opcion
     
+
     def check_internet(self):
-        sensorUltrasonico= JSONHandler("localDistance.json")
-        Led= JSONHandler("LedLocal.json")
-        Temperatura= JSONHandler("localTemperatura.json")
+        sensorUltrasonico = JSONHandler("localDistance.json")
+        Led = JSONHandler("LedLocal.json")
+        Temperatura = JSONHandler("localTemperatura.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
-            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection=db['Ultrasonico']
-            collection2=db['led']
-            collection3=db['Temperatura']
-            print("Connected to MongoDB")
-            try:
-               ultra=sensorUltrasonico.open()
-               led=Led.open()
-               tem=Temperatura.open()
-              
-               for i in ultra:
-                 collection.insert_one(i)
-               sensorUltrasonico.save([])
+            with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
+                db = client["Raspberry"]
+                collection = db['Ultrasonico']
+                collection2 = db['led']
+                collection3 = db['Temperatura']
+                try:
+                    with sensorUltrasonico.open() as ultra:
+                        for i in ultra:
+                            collection.insert_one(i)
+                        sensorUltrasonico.save([])
 
-               for i in led:
-                 collection2.insert_one(i)
-            
-               Led.save([])
+                    with Led.open() as led:
+                        for i in led:
+                            collection2.insert_one(i)
+                        Led.save([])
 
-               for i in tem:
-                    collection3.insert_one(i)
-               Temperatura.save([])
-            except:
-                pass
-  
+                    with Temperatura.open() as tem:
+                        for i in tem:
+                            collection3.insert_one(i)
+                        Temperatura.save([])
+
+                except:
+                    pass
+
         else:
             print("No hay internet")
-          
 
 
 
