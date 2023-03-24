@@ -68,7 +68,7 @@ class DHTSensor(LISTA, JSONHandler):
                     print("Temperatura F: {:.1f}, Temperatura C: {:.1f}, Humedad: {}%".format(*temperatures))
                     self.check_internet(*temperatures)
 
-                    return temperatures
+                    
             elif opcion == 2:
                 break
             else:

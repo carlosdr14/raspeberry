@@ -57,11 +57,11 @@ class Main:
 
             opcion = self.menu()
             if opcion == 1:
-               led= self.led.run()
+               self.led.run()
             elif opcion == 2:
-                ultra=self.ultrasonic_sensor.run()
+                self.ultrasonic_sensor.run()
             elif opcion == 3:
-                tem=self.temperatura.run()
+                self.temperatura.run()
             elif opcion == 4:
 
 
