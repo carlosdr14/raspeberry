@@ -35,7 +35,8 @@ class Main:
                 try:
                     ultra = sensorUltrasonico.open()
                     for i in ultra:
-                        collection.insert_one(i)
+                        data = {"sensor": "ultrasonico", "data": [i]}
+                        collection.insert_one(data)
                     sensorUltrasonico.save([])
 
                 except:
