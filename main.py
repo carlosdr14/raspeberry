@@ -49,12 +49,37 @@ class Main:
         else:
             print("No hay internet")
 
+    def check_internet2(self):
+        
+        Led = JSONHandler("localLedd.json")
+        Temperatura = JSONHandler("localTemperatura.json")
+        check_internet = CheckInternet()
+        if check_internet.is_connected():
+            print("Hay internet")
+            with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
+                db = client["Raspberry"]
+                collection = db['SensorsData']
+                try:
+                    sensor= Led.open()
+                    for i in sensor:
+                        data = {"sensor": "Led", "data": sensor}
+                        collection.insert_one(data)
+                    Led.save([])
+
+              
+
+                except:
+                    pass
+
+        else:
+            print("No hay internet")
+
 
 
     def run(self):
         while True:
             self.check_internet()
-
+            self.check_internet2()
             opcion = self.menu()
             if opcion == 1:
                self.led.run()
