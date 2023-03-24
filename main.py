@@ -35,23 +35,13 @@ class Main:
                 db = client["Raspberry"]
                 collection = db['SensorsData']
                 try:
-                    with sensorUltrasonico.open() as ultra:
-                        for i in ultra:
-                            data = {"sensor": "ultrasonico", "data": i}
-                            collection.insert_one(data)
-                        sensorUltrasonico.save([])
+                    sensor= sensorUltrasonico.open()
+                    for i in sensor:
+                        data = {"sensor": "ultrasonico", "data": i}
+                        collection.insert_one(data)
+                    sensorUltrasonico.save([])
 
-                    with Led.open() as led:
-                        for i in led:
-                            data = {"sensor": "led", "data": i}
-                            collection.insert_one(data)
-                        Led.save([])
-
-                    with Temperatura.open() as tem:
-                        for i in tem:
-                            data = {"sensor": "temperatura", "data": i}
-                            collection.insert_one(data)
-                        Temperatura.save([])
+              
 
                 except:
                     pass
