@@ -39,8 +39,7 @@ class DHTSensor(LISTA, JSONHandler):
             db = client["Raspberry"]
             collection = db['Temperatura']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)
+           
             collection.insert_one(d)
         else:
             print(message)
