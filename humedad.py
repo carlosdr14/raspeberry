@@ -26,5 +26,4 @@ try:
 # Reset by pressing CTRL + C
 except KeyboardInterrupt:
         print("Measurement stopped by User")
-        GPIO.cleanup()
         
