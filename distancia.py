@@ -51,7 +51,7 @@ class UltrasonicSensor(LISTA,JSONHandler):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
         json_handler = JSONHandler("localDistance.json")
-        d= {"Distancia": distance, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
+        d= {"Nombre": "Ultrasonico","Distancia": distance, "cm": "cm", "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S"), "PIN_Trigger": self.trigger_pin, "PIN_Echo": self.echo_pin, "Ubicacion":"Frente del Carrito"}
         if status:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
             db = client["Raspberry"]
