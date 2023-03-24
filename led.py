@@ -44,13 +44,8 @@ class Led (Lista,JSONHandler):
             db = client["Raspberry"]
             collection = db['Led']
             print("Connected to MongoDB")
-            new_data = [d]
-            try:
-                existing_data = json_handler.open()
-                new_data.extend(existing_data)
-            except:
-                pass
-            json_handler.save(new_data)
+            self.agregar(d)
+            self.save(d)
             collection.insert_one(d)
         else:
             print(message)
