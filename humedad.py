@@ -2,6 +2,7 @@ import time
 import board
 import adafruit_dht
 import pymongo
+import json
 from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
 from lista import LISTA
@@ -38,23 +39,8 @@ class DHTSensor(LISTA, JSONHandler):
             "Ubicacion": "Dentro del Carrito"
         }
 
-        if status:
-            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection = db['Temperatura']
-            print("Connected to MongoDB")
-            
-            self.agregar(d)
-            self.save(d)
-
-        else:
-            print(message)
-            try:
-                products = self.open(self.file_name)
-                products.append(d)
-                self.save(products, self.file_name)
-            except:
-                self.save([d], self.file_name)
+        with open('localTemperatura.json', 'w') as f:
+          json.dump(d, f)
 
     def limpiar(self):
         self.dhtDevice.exit()
