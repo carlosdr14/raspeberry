@@ -46,7 +46,7 @@ class Led (LISTA,JSONHandler):
  
         self.agregar(d)
         self.save(d)
-        return d
+        
 
     def menu (self):
         print("1. Encender")
