@@ -26,17 +26,8 @@ class DHTSensor(LISTA, JSONHandler):
             return None
 
     def check_internet(self, temperature_c, temperature_f, humidity):
- 
-        # Check if the file exists
-        if not os.path.isfile('localTemperatura.json'):
-            # If the file doesn't exist, create an empty list
-            data = []
-        else:
-            # If the file exists, read the existing data from the file
-            with open('localTemperatura.json', 'r') as f:
-                data = json.load(f)
-
-        # Append the new data to the existing data
+        check_internet = CheckInternet()
+        status, message = check_internet.is_connected()
         d = {
             "Nombre": "DHT11",
             "Temperatura": temperature_c,
@@ -47,12 +38,8 @@ class DHTSensor(LISTA, JSONHandler):
             "Pin": self.pin,
             "Ubicacion": "Dentro del Carrito"
         }
-        data.append(d)
-
-        # Write the updated data back to the file
-        with open('localTemperatura.json', 'w') as f:
-            json.dump(data, f)
-
+        self.append(d)
+        self.save(d)
 
     def limpiar(self):
         self.dhtDevice.exit()
