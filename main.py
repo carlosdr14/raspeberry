@@ -36,9 +36,9 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= sensorUltrasonico.open()
-                    for i in sensor:
-                        data = {"sensor": "ultrasonico", "data": sensor}
-                        collection.insert_one(data)
+                    
+                    data = {"sensor": "ultrasonico", "data": sensor}
+                    collection.insert_one(data)
                     sensorUltrasonico.save([])
 
               
@@ -61,10 +61,33 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= Led.open()
-                    for i in sensor:
-                        data = {"sensor": "Led", "data": sensor}
-                        collection.insert_one(data)
+                    
+                    data = {"sensor": "Led", "data": sensor}
+                    collection.insert_one(data)
                     Led.save([])
+
+              
+
+                except:
+                    pass
+
+        else:
+            print("No hay internet")
+    def check_internet3(self):
+        
+        Temperatura = JSONHandler("localTemperatura.json")
+        check_internet = CheckInternet()
+        if check_internet.is_connected():
+            print("Hay internet")
+            with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
+                db = client["Raspberry"]
+                collection = db['SensorsData']
+                try:
+                    sensor= Temperatura.open()
+                    
+                    data = {"sensor": "Led", "data": sensor}
+                    collection.insert_one(data)
+                    Temperatura.save([])
 
               
 
