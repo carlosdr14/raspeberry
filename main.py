@@ -27,7 +27,7 @@ class Main:
     def check_internet(self):
         sensorUltrasonico = JSONHandler("localDistance.json")
         Led = JSONHandler("LedLocal.json")
-        Temperatura = JSONHandler("localTemperatura.json")
+        Temperatura = JSONHandler("TemperaturaLocal.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
