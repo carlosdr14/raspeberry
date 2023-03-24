@@ -41,18 +41,18 @@ class Main:
                led=Led.open()
                tem=Temperatura.open()
               #
-               for i in ultra:
-                 collection.insert_one(i)
-               sensorUltrasonico.save([])
+            #    for i in ultra:
+            #      collection.insert_one(i)
+            #    sensorUltrasonico.save([])
 
                for i in led:
                  collection2.insert_one(i)
             
                Led.save([])
 
-               for i in tem:
-                    collection3.insert_one(i)
-               Temperatura.save([])
+            #    for i in tem:
+            #         collection3.insert_one(i)
+            #    Temperatura.save([])
             except:
                 pass
   
