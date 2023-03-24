@@ -7,7 +7,7 @@ import json
 class Temperatura:
     def __init__(self):
         self.sensor = Adafruit_DHT.DHT11
-        self.pin = 5
+        self.pin = 16
         GPIO.setmode(GPIO.BCM)
 
     def get_temperatura_humedad(self):
