@@ -4,8 +4,9 @@ import adafruit_dht
 from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
 import pymongo
+from lista  import Lista
 
-class DHTSensor(JSONHandler):
+class DHTSensor(JSONHandler, Lista):
     def __init__(self, pin,file_name):
         self.dhtDevice = adafruit_dht.DHT11(pin)
         self.running = False
