@@ -35,7 +35,7 @@ class Main:
                 try:
                     sensor= sensorUltrasonico.open()
                     for i in sensor:
-                     data = [{"sensor": "ultrasonico", "data": i}]
+                     data = {"sensor": "ultrasonico", "data": i}
                     collection.insert_one(data)
                     sensorUltrasonico.save([])
 
@@ -60,7 +60,7 @@ class Main:
                 try:
                     sensor= Led.open()
                     for i in sensor:
-                     data = [{"sensor": "Led", "data": i}]
+                     data = {"sensor": "Led", "data": i}
                     collection.insert_one(data)
                     Led.save([])
 
@@ -83,7 +83,7 @@ class Main:
                 try:
                     sensor= Temperatura.open()
                     for i in sensor:
-                     data = [{"sensor": "Led", "data": i}]
+                     data = {"sensor": "Led", "data": i}
                    
                     collection.insert_one(data)
                     Temperatura.save([])
