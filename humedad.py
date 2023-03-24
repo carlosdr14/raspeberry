@@ -1,29 +1,12 @@
-#Libraries
-import RPi.GPIO as GPIO
-import time
 import Adafruit_DHT
- 
-#GPIO Mode (BOARD / BCM)
-GPIO.setmode(GPIO.BCM)
- 
-#set GPIO Pins
-DHT_PIN = 16
- 
-def read_sensor():
-    # read sensor data
-    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, DHT_PIN)
- 
-    return temperature, humidity
- 
-try:
-     while True:
-      temperature, humidity = read_sensor()
-      print("Temperature = {:.1f}°C, Humidity = {:.1f}%".format(temperature, humidity))
-      time.sleep(4)
- 
 
- 
-# Reset by pressing CTRL + C
-except KeyboardInterrupt:
-        print("Measurement stopped by User")
-        
+DHT_SENSOR = Adafruit_DHT.DHT22
+DHT_PIN = 16
+
+while True:
+    humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
+
+    if humidity is not None and temperature is not None:
+        print("Temp={0:0.1f}*C  Humidity={1:0.1f}%".format(temperature, humidity))
+    else:
+        print("Failed to retrieve data from humidity sensor")
