@@ -41,7 +41,7 @@ class Temperatura:
                 break
             else:
                 print("Opcion no valida")
-    
 
-
-
+if __name__ == "__main__":
+    temperatura = Temperatura()
+    temperatura.run()
