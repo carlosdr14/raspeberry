@@ -33,7 +33,7 @@ class DHTSensor(LISTA, JSONHandler):
             "Humedad": humidity,
             "Fecha": time.strftime("%d/%m/%y"),
             "Hora": time.strftime("%H:%M:%S"),
-            "Pin": self.pin,
+            "Pin": self.dhtDevice,
             "Ubicacion": "Dentro del Carrito"
         }
 
