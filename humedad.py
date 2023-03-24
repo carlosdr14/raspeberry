@@ -6,7 +6,7 @@ from jsonHandler import JSONHandler
 import pymongo
 from lista  import Lista
 
-class DHTSensor(JSONHandler, Lista):
+class DHTSensor(Lista,JSONHandler):
     def __init__(self, pin,file_name):
         self.dhtDevice = adafruit_dht.DHT11(pin)
         self.running = False
@@ -29,7 +29,7 @@ class DHTSensor(JSONHandler, Lista):
     def check_internet(self, temperature_c, temperature_f, humidity):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
-        json_handler = JSONHandler("localDistance.json")
+        json_handler = JSONHandler("TemperaturaLocal.json")
         d= {"Temperatura": temperature_c, "Fahrenheit": temperature_f, "Humedad": humidity, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
        
         if status:
@@ -40,7 +40,15 @@ class DHTSensor(JSONHandler, Lista):
             self.agregar(d)
             self.save(d)
             collection.insert_one(d)
-           
+               
+        else:
+            print(message)
+            try:
+             products = json_handler.open()
+             products.append(d)
+             json_handler.save(products)
+            except:
+                json_handler.save([d])
 
 
 
