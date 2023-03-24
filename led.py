@@ -43,21 +43,10 @@ class Led (LISTA,JSONHandler):
         status, message = check_internet.is_connected()
         json_handler = JSONHandler("localLedd.json")
         d = {"Nombre": "Led","Estado": estado, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S"), "Pin": self.pin, "Ubicacion":"Dentro del Carrito"}
-        if status:
-            client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")
-            db = client["Raspberry"]
-            collection = db['Led']
-            print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)
-        else:
-            print(message)
-            try:
-             products = json_handler.open()
-             products.append(d)
-             json_handler.save(products)
-            except:
-                json_handler.save([d])
+ 
+        self.agregar(d)
+        self.save(d)
+      
 
     def menu (self):
         print("1. Encender")
