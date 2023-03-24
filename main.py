@@ -28,7 +28,7 @@ class Main:
         sensorUltrasonico = JSONHandler("localDistance.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
-            print("Hay internet")
+            print("1")
             with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
                 db = client["Raspberry"]
                 collection = db['SensorsData']
@@ -51,7 +51,7 @@ class Main:
        
         check_internet = CheckInternet()
         if check_internet.is_connected():
-            print("Hay internet")
+            print("2")
             with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
                 db = client["Raspberry"]
                 collection = db['SensorsData']
@@ -73,7 +73,7 @@ class Main:
         Temperatura = JSONHandler("localTemperatura.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
-            print("Hay internet")
+            print("3")
             with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
                 db = client["Raspberry"]
                 collection = db['SensorsData']
