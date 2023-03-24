@@ -34,9 +34,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     ultra = sensorUltrasonico.open()
-                    for i in ultra:
-                        data = {"sensor": "ultrasonico", "data": [i]}
-                        collection.insert_one(data)
+                    
+                    collection.insert_one(ultra)
                     sensorUltrasonico.save([])
 
                 except:
@@ -58,8 +57,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     led= Led.open()
-                    for i in led:
-                     collection.insert_one(i)
+                   
+                    collection.insert_one(led)
                     Led.save([])
 
               
@@ -80,8 +79,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     tem= Temperatura.open()
-                    for i in tem:
-                        collection.insert_one(i)
+                    
+                    collection.insert_one(tem)
                    
                     
                     Temperatura.save([])
