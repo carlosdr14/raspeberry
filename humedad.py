@@ -19,7 +19,7 @@ try:
      while True:
       temperature, humidity = read_sensor()
       print("Temperature = {:.1f}°C, Humidity = {:.1f}%".format(temperature, humidity))
-      time.sleep(2)
+      time.sleep(4)
  
 
  
