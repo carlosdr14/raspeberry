@@ -38,7 +38,7 @@ class DHTSensor(LISTA, JSONHandler):
             "Pin": self.pin,
             "Ubicacion": "Dentro del Carrito"
         }
-        self.append(d)
+        self.agregar(d)
         self.save(d)
 
     def limpiar(self):
