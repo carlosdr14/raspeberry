@@ -61,8 +61,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= Led.open()
-                    
-                    data = {"sensor": "Led", "data": sensor}
+                    for sensor in sensor:
+                     data = {"sensor": "Led", "data": sensor}
                     collection.insert_one(data)
                     Led.save([])
 
@@ -84,8 +84,9 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= Temperatura.open()
-                    
-                    data = {"sensor": "Led", "data": sensor}
+                    for sensor in sensor:
+                     data = {"sensor": "Led", "data": sensor}
+                   
                     collection.insert_one(data)
                     Temperatura.save([])
 
@@ -103,6 +104,7 @@ class Main:
         while True:
             self.check_internet()
             self.check_internet2()
+            self.check_internet3()
             opcion = self.menu()
             if opcion == 1:
                self.led.run()
