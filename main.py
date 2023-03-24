@@ -25,7 +25,7 @@ class Main:
     
     def check_internet(self):
         sensorUltrasonico= JSONHandler("localDistance.json")
-        Led= JSONHandler("localLed.json")
+        Led= JSONHandler("LedLocal.json")
         Temperatura= JSONHandler("localTemperatura.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
@@ -40,19 +40,19 @@ class Main:
                ultra=sensorUltrasonico.open()
                led=Led.open()
                tem=Temperatura.open()
-              #
-            #    for i in ultra:
-            #      collection.insert_one(i)
-            #    sensorUltrasonico.save([])
+              
+               for i in ultra:
+                 collection.insert_one(i)
+               sensorUltrasonico.save([])
 
                for i in led:
                  collection2.insert_one(i)
             
                Led.save([])
 
-            #    for i in tem:
-            #         collection3.insert_one(i)
-            #    Temperatura.save([])
+               for i in tem:
+                    collection3.insert_one(i)
+               Temperatura.save([])
             except:
                 pass
   
