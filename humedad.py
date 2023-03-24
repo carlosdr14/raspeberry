@@ -28,7 +28,8 @@ class DHTSensor:
             opcion = self.menu()
             if opcion == 1:
                 self.getTempeture()
-                
+                print (self.getTempeture())
+
             elif opcion == 2:
                 break
             else:
