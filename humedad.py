@@ -1,10 +1,14 @@
 import time
 import board
 import adafruit_dht
+import time
+
 from mongoConexion import CheckInternet
-from jsonHandler import JSONHandler
 import pymongo
-from lista  import Lista
+from jsonHandler import JSONHandler
+from lista import Lista
+
+
 
 class DHTSensor(Lista,JSONHandler):
     def __init__(self, pin,file_name):
