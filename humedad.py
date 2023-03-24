@@ -15,7 +15,7 @@ class DHTSensor:
                 temperature_c = self.dhtDevice.temperature
                 temperature_f = temperature_c * (9 / 5) + 32
                 humidity = self.dhtDevice.humidity
-                return("Temp: {:.1f} F / {:.1f} C    Humidity: {}% "
+                return("Temp: Fahrenheit  {:.1f} F /  Celcius {:.1f} C    Humidity: {}% "
                       .format(temperature_f, temperature_c, humidity))
             except RuntimeError as error:
                 print(error.args[0])

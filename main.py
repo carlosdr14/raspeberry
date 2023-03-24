@@ -18,7 +18,7 @@ class Main:
     def menu(self):
         print("1. Led")
         print("2. Distancia")
-        print("3. TEmperatura y humedad")
+        print("3. Temperatura y humedad")
         print("4. Salir")
         opcion = int(input("Ingrese una opcion: "))
         return opcion
