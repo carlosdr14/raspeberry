@@ -65,7 +65,7 @@ class Main:
             elif opcion == 2:
                 self.ultrasonic_sensor.run()
             elif opcion == 3:
-                self.temperatura.run()
+                self.temperatura.runn()
             elif opcion == 4:
                 break
             else:
