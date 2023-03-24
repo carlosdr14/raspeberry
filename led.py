@@ -39,7 +39,7 @@ class Led (LISTA,JSONHandler):
     def check_internet(self, estado):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
-        json_handler = JSONHandler("localLed.json")
+        json_handler = JSONHandler("localLedd.json")
         d = {"Estado": estado, "Fecha": time.strftime("%d/%m/%y"), "Hora": time.strftime("%H:%M:%S")}
         if status:
             client = pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test")

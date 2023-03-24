@@ -10,9 +10,9 @@ class Main:
     def __init__(self):
         
         
-        self.led = Led(19, "LedLocal.json")
-        self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.temperatura = DHTSensor(board.D16,"TemperaturaLocal.json")
+        self.led = Led(19, "localLedd.json")
+        self.ultrasonic_sensor = UltrasonicSensor(18, 24, "localDistance.json")
+        self.temperatura = DHTSensor(board.D16,"localTemperatura.json")
        
 
     def menu(self):
@@ -26,8 +26,8 @@ class Main:
 
     def check_internet(self):
         sensorUltrasonico = JSONHandler("localDistance.json")
-        Led = JSONHandler("LedLocal.json")
-        Temperatura = JSONHandler("TemperaturaLocal.json")
+        Led = JSONHandler("localLedd.json")
+        Temperatura = JSONHandler("localTemperatura.json")
         check_internet = CheckInternet()
         if check_internet.is_connected():
             print("Hay internet")
