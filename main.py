@@ -12,7 +12,7 @@ class Main:
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.temperatura = DHTSensor(board.D16)
+        self.temperatura = DHTSensor(board.D16,"TemperaturaLocal.json")
        
 
     def menu(self):
