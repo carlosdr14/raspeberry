@@ -84,8 +84,8 @@ class Main:
                 collection = db['SensorsData']
                 try:
                     sensor= Temperatura.open()
-                    for sensor in sensor:
-                     data = {"sensor": "Led", "data": sensor}
+                    for i in sensor:
+                     data = [{"sensor": "Led", "data": i}]
                    
                     collection.insert_one(data)
                     Temperatura.save([])
