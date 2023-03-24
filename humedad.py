@@ -9,6 +9,7 @@ from lista import LISTA
 
 class DHTSensor(LISTA, JSONHandler):
     def __init__(self, pin, file_name):
+        super().__init__()
         self.dhtDevice = adafruit_dht.DHT11(pin)
         self.file_name = file_name
 

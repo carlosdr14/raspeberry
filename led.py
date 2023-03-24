@@ -7,6 +7,7 @@ import pymongo
 
 class Led (LISTA,JSONHandler):
     def __init__(self, pin):
+        super().__init__()
         self.pin = pin
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
