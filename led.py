@@ -11,6 +11,7 @@ class Led (Lista,JSONHandler):
         GPIO.setmode(GPIO.BCM)
         GPIO.setwarnings(False)
         GPIO.setup(self.pin, GPIO.OUT)
+        self.lista = Lista()
 
     def encender(self):
         GPIO.output(self.pin, GPIO.HIGH)
@@ -44,8 +45,8 @@ class Led (Lista,JSONHandler):
             db = client["Raspberry"]
             collection = db['Led']
             print("Connected to MongoDB")
-            self.agregar(d)
-            self.save(d)
+            self.lista.agregar(d)
+            self.lista.save(d)
             collection.insert_one(d)
         else:
             print(message)
