@@ -33,6 +33,8 @@ class Led (LISTA,JSONHandler):
                 time.sleep(tiempo_apagado)
         except KeyboardInterrupt:
             print("Se ha detenido el parpadeo")
+
+        return "Parpadeo"
             
     def limpiar(self):
         GPIO.cleanup()
@@ -76,7 +78,9 @@ class Led (LISTA,JSONHandler):
                 estado=self.apagar()
                 self.check_internet(estado)
             elif opcion == 3:
-                self.parpadear(0.5, 0.5, 5)
+               Estado= self.parpadear(0.5, 0.5, 5)
+               self.check_internet(Estado)
+
             elif opcion == 4:
 
                 break

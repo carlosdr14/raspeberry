@@ -27,14 +27,11 @@ class DHTSensor(LISTA, JSONHandler):
         check_internet = CheckInternet()
         status, message = check_internet.is_connected()
         d = {
-            "Nombre": "DHT11",
             "Temperatura": temperature_c,
             "Fahrenheit": temperature_f,
             "Humedad": humidity,
             "Fecha": time.strftime("%d/%m/%y"),
-            "Hora": time.strftime("%H:%M:%S"),
-            "PIN": self.dhtDevice.pin,
-            "Ubicacion": "Dentre del Carrito"
+            "Hora": time.strftime("%H:%M:%S")
         }
 
         if status:
