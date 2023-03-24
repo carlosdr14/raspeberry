@@ -43,8 +43,9 @@ class DHTSensor(LISTA, JSONHandler):
             db = client["Raspberry"]
             collection = db['Temperatura']
             print("Connected to MongoDB")
-           
-            collection.insert_one(d)
+            self.agregar(d)
+            self.save(d)
+
         else:
             print(message)
             try:
@@ -65,6 +66,7 @@ class DHTSensor(LISTA, JSONHandler):
                 if temperatures is not None:
                     self.check_internet(*temperatures)
                     print("Temperatura F: {:.1f}, Temperatura C: {:.1f}, Humedad: {}%".format(*temperatures))
+                    return temperatures
             elif opcion == 2:
                 break
             else:

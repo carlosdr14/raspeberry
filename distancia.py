@@ -57,8 +57,8 @@ class UltrasonicSensor(LISTA,JSONHandler):
             db = client["Raspberry"]
             collection=db['Ultrasonico']
             print("Connected to MongoDB")
-           
-            collection.insert_one(d)
+            self.agregar(d)
+            self.save(d)
 
             
             
@@ -83,7 +83,7 @@ class UltrasonicSensor(LISTA,JSONHandler):
             if opcion == 1:
                 dist = self.measure_distance()
                 print("Measured Distance = %.1f cm" % dist)
-                self.check_internet(dist)
+                return dist
             elif opcion == 2:
                 self.run_continuous()
             elif opcion == 3:

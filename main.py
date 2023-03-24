@@ -33,23 +33,24 @@ class Main:
             print("Hay internet")
             with pymongo.MongoClient("mongodb+srv://admin:1234admin@cluster0.qf2sgqk.mongodb.net/test") as client:
                 db = client["Raspberry"]
-                collection = db['Ultrasonico']
-                collection2 = db['led']
-                collection3 = db['Temperatura']
+                collection = db['SensorsData']
                 try:
                     with sensorUltrasonico.open() as ultra:
                         for i in ultra:
-                            collection.insert_one(i)
+                            data = {"sensor": "ultrasonico", "data": i}
+                            collection.insert_one(data)
                         sensorUltrasonico.save([])
 
                     with Led.open() as led:
                         for i in led:
-                            collection2.insert_one(i)
+                            data = {"sensor": "led", "data": i}
+                            collection.insert_one(data)
                         Led.save([])
 
                     with Temperatura.open() as tem:
                         for i in tem:
-                            collection3.insert_one(i)
+                            data = {"sensor": "temperatura", "data": i}
+                            collection.insert_one(data)
                         Temperatura.save([])
 
                 except:
@@ -66,11 +67,11 @@ class Main:
 
             opcion = self.menu()
             if opcion == 1:
-                self.led.run()
+               led= self.led.run()
             elif opcion == 2:
-                self.ultrasonic_sensor.run()
+                ultra=self.ultrasonic_sensor.run()
             elif opcion == 3:
-                self.temperatura.run()
+                tem=self.temperatura.run()
             elif opcion == 4:
 
 
