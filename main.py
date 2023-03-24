@@ -1,6 +1,6 @@
 from led import Led
 from distancia import UltrasonicSensor
-from HumedadMongo import Temperatura
+from humedad import DHTSensor
 from mongoConexion import CheckInternet
 from jsonHandler import JSONHandler
 import pymongo
@@ -11,7 +11,7 @@ class Main:
         
         self.led = Led(19)
         self.ultrasonic_sensor = UltrasonicSensor(18, 24, "DistanciaLocal.json")
-        self.temperatura = Temperatura()
+        self.temperatura = DHTSensor()
        
 
     def menu(self):
