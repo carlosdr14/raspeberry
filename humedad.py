@@ -2,7 +2,7 @@ import time
 import board
 import adafruit_dht
 #Initial the dht device, with data pin connected to:
-dhtDevice = adafruit_dht.DHT11(board.D17)
+dhtDevice = adafruit_dht.DHT11(board.D16)
 while True:
     try:
          # Print the values to the serial port
